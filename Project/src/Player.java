@@ -14,7 +14,6 @@ public class Player {
     }
 
     public void setChips(int balance) {
-        // TODO: determine chips to set given the balance
         int numOfOneThousands = 0;
         int numOfFiveHundreds = 0;
         int numOfOneHundreds = 0;
@@ -74,7 +73,7 @@ public class Player {
         for (ChipValue chipValue : chips.keySet()) {
             int frequency = chips.getOrDefault(chipValue, 0);
 
-            total += (ChipValue.getChipNumberValue(chipValue));
+            total += (ChipValue.getChipNumberValue(chipValue) * frequency);
         }
 
         return total;
