@@ -1,10 +1,20 @@
-import java.util.Map;
 import java.util.EnumMap;
 
 public class Player {
     public EnumMap<ChipValue, Integer> chips; // key = chip, value = number of that chip
     private int balance;
     private Card[] hand;
+    private Hand handValue;
+
+
+    public Player() {
+        int defaultBalance = 1000;
+
+        this.chips = new EnumMap<>(ChipValue.class);
+
+        setBalance(defaultBalance);
+        setChips(defaultBalance);
+    }
 
     public Player(int initialBalance) {
         this.chips = new EnumMap<>(ChipValue.class);
@@ -77,5 +87,22 @@ public class Player {
         }
 
         return total;
+    }
+
+    // ---- GAMEPLAY ----
+    public void call() {
+
+    }
+
+    public void raise() {
+
+    }
+
+    public void fold() {
+
+    }
+
+    public void deal() {
+
     }
 }

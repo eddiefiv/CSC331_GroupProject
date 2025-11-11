@@ -5,5 +5,22 @@ public class Driver {
 
         System.out.println(player.chips);
         System.out.println(balance);
+
+        CardRank rank = CardRank.getRankFromValue(5);
+
+        System.out.println(rank);
+
+        Table table = new Table(0);
+        table.newDeck();
+
+        for (Card card : table.getDeck()) {
+            System.out.println(card);
+        }
+
+        table.shuffleDeck();
+
+        for (Card card : table.getDeck()) {
+            System.out.println(card);
+        }
     }
 }
