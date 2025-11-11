@@ -22,5 +22,11 @@ public class Driver {
         for (Card card : table.getDeck()) {
             System.out.println(card);
         }
+
+        table.joinTable(player);
+
+        table.deal();
+
+        System.out.println(player.getHand());
     }
 }

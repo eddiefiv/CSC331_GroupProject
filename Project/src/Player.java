@@ -1,9 +1,10 @@
+import java.util.ArrayList;
 import java.util.EnumMap;
 
 public class Player {
     public EnumMap<ChipValue, Integer> chips; // key = chip, value = number of that chip
     private int balance;
-    private Card[] hand;
+    private ArrayList<Card> hand = new ArrayList<Card>();
     private Hand handValue;
 
 
@@ -21,6 +22,16 @@ public class Player {
 
         setBalance(initialBalance);
         setChips(initialBalance);
+    }
+
+    // GETTERS AND SETTERS
+
+    public ArrayList<Card> getHand() {
+        return hand;
+    }
+
+    public void setHand(ArrayList<Card> hand) {
+        this.hand = hand;
     }
 
     public void setChips(int balance) {
@@ -73,8 +84,13 @@ public class Player {
         this.balance = balance;
     }
 
+    // UTILITIES
     public void addChip(ChipValue chipValue, int amount) {
         this.chips.put(chipValue, this.chips.getOrDefault(chipValue, 0) + amount);
+    }
+
+    public void addCardToHand(Card card) {
+        hand.add(card);
     }
 
     public int calculateBalance() {

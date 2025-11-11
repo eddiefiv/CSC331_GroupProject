@@ -16,12 +16,28 @@ public class Table {
         return deck;
     }
 
+    // GAMEPLAY
     public void gameplayLoop() {
 
     }
 
+    public void deal() {
+        for (Player player : players) {
+            for (Card card : deck) {
+                for (int i = 0; i < 2; i++) { // Deal 2 cards to each player in the game using the deck
+                    player.addCardToHand(card);
+                    deck.remove(card);
+                }
+            }
+        }
+    }
+
     public void evaluate() {
 
+    }
+
+    public void joinTable(Player playerToJoin) {
+        players.add(playerToJoin);
     }
 
     /**
