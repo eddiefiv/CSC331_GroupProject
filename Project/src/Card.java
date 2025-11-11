@@ -7,6 +7,15 @@ public class Card {
         this.rank = rank;
     }
 
+    // GETTERS
+    public CardSuit getSuit() {
+        return suit;
+    }
+
+    public CardRank getRank() {
+        return rank;
+    }
+
     @Override
     public String toString() {
         return String.format("Rank: %s, Suit: %s", this.rank, this.suit);

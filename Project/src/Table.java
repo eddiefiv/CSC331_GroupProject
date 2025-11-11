@@ -4,6 +4,7 @@ public class Table {
     private ArrayList<Player> players = new ArrayList<Player>();
     private int pot;
     private ArrayList<Card> deck =  new ArrayList<Card>(52);
+    public ArrayList<Card> board = new ArrayList<Card>(5);
 
     public Table(int numNPCs) {
         for (int i = 0; i < numNPCs; i++) {

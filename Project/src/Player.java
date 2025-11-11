@@ -5,8 +5,6 @@ public class Player {
     public EnumMap<ChipValue, Integer> chips; // key = chip, value = number of that chip
     private int balance;
     private ArrayList<Card> hand = new ArrayList<Card>();
-    private Hand handValue;
-
 
     public Player() {
         int defaultBalance = 1000;
@@ -120,5 +118,10 @@ public class Player {
 
     public void deal() {
 
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Hand: %s%nChips: %s%n", hand, chips);
     }
 }

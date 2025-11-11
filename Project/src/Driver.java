@@ -1,32 +1,21 @@
 public class Driver {
     public static void main(String[] args) {
-        Player player = new Player(750);
-        int balance = player.calculateBalance();
-
-        System.out.println(player.chips);
-        System.out.println(balance);
-
-        CardRank rank = CardRank.getRankFromValue(5);
-
-        System.out.println(rank);
+        Player p1 = new Player(750);
 
         Table table = new Table(0);
-        table.newDeck();
+        table.joinTable(p1);
 
-        for (Card card : table.getDeck()) {
-            System.out.println(card);
-        }
+        p1.addCardToHand(new Card(CardSuit.HEART, CardRank.ACE));
+        p1.addCardToHand(new Card(CardSuit.HEART, CardRank.QUEEN));
 
-        table.shuffleDeck();
+        table.board.add(new Card(CardSuit.DIAMOND, CardRank.EIGHT));
+        table.board.add(new Card(CardSuit.HEART, CardRank.KING));
+        table.board.add(new Card(CardSuit.HEART, CardRank.TEN));
+        table.board.add(new Card(CardSuit.CLUB, CardRank.ACE));
+        table.board.add(new Card(CardSuit.HEART, CardRank.JACK));
 
-        for (Card card : table.getDeck()) {
-            System.out.println(card);
-        }
+        HandType hand = HandEvaluator.evaluateHand(p1.getHand(), table.board);
 
-        table.joinTable(player);
-
-        table.deal();
-
-        System.out.println(player.getHand());
+        System.out.println(hand);
     }
 }

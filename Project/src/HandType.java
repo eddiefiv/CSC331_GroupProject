@@ -1,4 +1,4 @@
-public enum Hand {
+public enum HandType {
     HIGH_CARD(1),
     ONE_PAIR(2),
     TWO_PAIR(3),
@@ -10,9 +10,9 @@ public enum Hand {
     STRAIGHT_FLUSH(9),
     ROYAL_FLUSH(10);
 
-    Hand(int strength) {}
+    HandType(int strength) {}
 
-    public static int getStrengthFromHand(Hand hand) {
+    public static int getStrengthValueFromHand(HandType hand) {
         return switch (hand) {
             case HIGH_CARD -> 1;
             case ONE_PAIR -> 2;
@@ -26,13 +26,5 @@ public enum Hand {
             case ROYAL_FLUSH -> 10;
             default -> 0;
         };
-    }
-
-    public static Hand getHandFromCards(Card[] cards) {
-        for (Card card : cards) {
-            // TODO Hand calculation
-        }
-
-        return Hand.HIGH_CARD;
     }
 }
