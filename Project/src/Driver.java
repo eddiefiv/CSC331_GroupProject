@@ -5,14 +5,14 @@ public class Driver {
         Table table = new Table(0);
         table.joinTable(p1);
 
-        p1.addCardToHand(new Card(CardSuit.HEART, CardRank.ACE));
-        p1.addCardToHand(new Card(CardSuit.HEART, CardRank.QUEEN));
+        p1.addCardToHand(new Card(CardSuit.HEART, CardRank.NINE));
+        p1.addCardToHand(new Card(CardSuit.HEART, CardRank.TEN));
 
         table.board.add(new Card(CardSuit.DIAMOND, CardRank.EIGHT));
-        table.board.add(new Card(CardSuit.HEART, CardRank.KING));
-        table.board.add(new Card(CardSuit.HEART, CardRank.TEN));
-        table.board.add(new Card(CardSuit.CLUB, CardRank.ACE));
         table.board.add(new Card(CardSuit.HEART, CardRank.JACK));
+        table.board.add(new Card(CardSuit.HEART, CardRank.QUEEN));
+        table.board.add(new Card(CardSuit.CLUB, CardRank.ACE));
+        table.board.add(new Card(CardSuit.HEART, CardRank.KING));
 
         HandType hand = HandEvaluator.evaluateHand(p1.getHand(), table.board);
 

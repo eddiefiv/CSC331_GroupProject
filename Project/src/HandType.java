@@ -24,7 +24,23 @@ public enum HandType {
             case FOUR_OF_A_KIND -> 8;
             case STRAIGHT_FLUSH -> 9;
             case ROYAL_FLUSH -> 10;
-            default -> 0;
+            default -> throw new IllegalStateException("Unexpected value: " + hand);
+        };
+    }
+
+    public static HandType getHandTypeFromStrengthValue(int strength) {
+        return switch (strength) {
+            case 1 -> HIGH_CARD;
+            case 2 -> ONE_PAIR;
+            case 3 -> TWO_PAIR;
+            case 4 -> THREE_OF_KIND;
+            case 5 -> STRAIGHT;
+            case 6 -> FLUSH;
+            case 7 -> FULL_HOUSE;
+            case 8 -> FOUR_OF_A_KIND;
+            case 9 -> STRAIGHT_FLUSH;
+            case 10 -> ROYAL_FLUSH;
+            default -> throw new IllegalStateException("Unexpected value: " + strength);
         };
     }
 }
