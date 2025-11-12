@@ -14,14 +14,20 @@ public class HandEvaluator {
             if (board.size() >= 3) {
                 HandType flushType = checkFlushes(combined);
                 if (!flushType.equals(HandType.HIGH_CARD)) return flushType;
-                //boolean fullHouse = checkFullHouse(combined);
-                //boolean straight = checkStraight(combined);
+                //TODO boolean fullHouse = checkFullHouse(combined);
+                //TODO boolean straight = checkStraight(combined);
+            }
+
+            if (board.size() >= 2) { // Check for four of a kind only if board has 2 or more cards because there needs to be 4 cards to be valid
+                HandType fourOfAKind = checkFourOfAKind(combined);
+                if (!fourOfAKind.equals(HandType.HIGH_CARD)) return fourOfAKind;
             }
         }
 
         return HandType.HIGH_CARD;
     }
 
+    // CHECKS
     private static HandType checkFlushes(ArrayList<Card> combinedHand) {
         // Boolean arrays to keep track of held cards in each suit
         // Each array has 14 booleans, toggled on if the corresponding card (ace-king) is present
@@ -64,6 +70,25 @@ public class HandEvaluator {
         return flushHand;
     }
 
+    private static HandType checkFourOfAKind(ArrayList<Card> combinedHand) {
+        EnumMap<CardRank, Integer> frequencyTable = createEmptyRankFrequencyTable();
+
+        // Add 1 to each value for every found key
+        for (Card card : combinedHand) {
+            frequencyTable.put(card.getRank(), frequencyTable.getOrDefault(card.getRank(), 0) + 1);
+        }
+
+        // If there are 4 or more of a single rank, then there is four of a kind
+        for (Integer frequency : frequencyTable.values()) {
+            if (frequency >= 4) {
+                return HandType.FOUR_OF_A_KIND;
+            }
+        }
+
+        return HandType.HIGH_CARD;
+    }
+
+    // HELPERS
     /**
      * Will check for royal flush, straight flush, or a regular flush
      */
@@ -108,5 +133,51 @@ public class HandEvaluator {
 
         }
         return HandType.HIGH_CARD; // Default if no flush
+    }
+
+    private static EnumMap<CardRank, Integer> createEmptyRankFrequencyTable() {
+        EnumMap<CardRank, Integer> frequencyTable = new EnumMap<>(CardRank.class);
+
+        frequencyTable.put(
+                CardRank.ACE, 0
+        );
+        frequencyTable.put(
+                CardRank.TWO, 0
+        );
+        frequencyTable.put(
+                CardRank.THREE, 0
+        );
+        frequencyTable.put(
+                CardRank.FOUR, 0
+        );
+        frequencyTable.put(
+                CardRank.FIVE, 0
+        );
+        frequencyTable.put(
+                CardRank.SIX, 0
+        );
+        frequencyTable.put(
+                CardRank.SEVEN, 0
+        );
+        frequencyTable.put(
+                CardRank.EIGHT, 0
+        );
+        frequencyTable.put(
+                CardRank.NINE, 0
+        );
+        frequencyTable.put(
+                CardRank.TEN, 0
+        );
+        frequencyTable.put(
+                CardRank.JACK, 0
+        );
+        frequencyTable.put(
+                CardRank.QUEEN, 0
+        );
+        frequencyTable.put(
+                CardRank.KING, 0
+        );
+
+        return frequencyTable;
     }
 }
