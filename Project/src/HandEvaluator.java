@@ -70,7 +70,15 @@ public class HandEvaluator {
         return flushHand;
     }
 
-    private static HandType checkFourOfAKind(ArrayList<Card> combinedHand) {
+    /**
+     * Checks if there are likeCardsToCheck like cards in the provided combinedHand.
+     *
+     * For example, checkLikeCards(hand, 3) will check if there are 3 of a kind in the hand, similarly
+     * @param combinedHand
+     * @param likeCardsToCheck
+     * @return
+     */
+    private static HandType checkLikeCards(ArrayList<Card> combinedHand, int likeCardsToCheck) {
         EnumMap<CardRank, Integer> frequencyTable = createEmptyRankFrequencyTable();
 
         // Add 1 to each value for every found key
