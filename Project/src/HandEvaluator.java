@@ -60,7 +60,7 @@ public class HandEvaluator {
         HandType clubsHand = hasFlush(true, true, clubs);
         HandType spadesHand = hasFlush(true, true, spades);
 
-        HandType flushHand = HandType.getHandTypeFromStrengthValue(Math.max(
+        return HandType.getHandTypeFromStrengthValue(Math.max(
                 HandType.getStrengthValueFromHand(heartsHand),
                 Math.max(HandType.getStrengthValueFromHand(diamondsHand),
                 Math.max(HandType.getStrengthValueFromHand(clubsHand),
