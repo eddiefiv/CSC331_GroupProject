@@ -19,7 +19,7 @@ public class HandEvaluator {
             }
 
             if (board.size() >= 2) { // Check for four of a kind only if board has 2 or more cards because there needs to be 4 cards to be valid
-                HandType fourOfAKind = checkFourOfAKind(combined);
+                HandType fourOfAKind = checkLikeCards(combined, 4);
                 if (!fourOfAKind.equals(HandType.HIGH_CARD)) return fourOfAKind;
             }
         }
