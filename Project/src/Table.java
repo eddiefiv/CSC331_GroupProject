@@ -1,10 +1,10 @@
 import java.util.ArrayList;
 
 public class Table {
-    private ArrayList<Player> players = new ArrayList<Player>();
-    private int pot;
-    private ArrayList<Card> deck =  new ArrayList<Card>(52);
-    public ArrayList<Card> board = new ArrayList<Card>(5);
+    private static ArrayList<Player> players = new ArrayList<Player>();
+    private static int pot;
+    private static ArrayList<Card> deck =  new ArrayList<Card>(52);
+    public static ArrayList<Card> board = new ArrayList<Card>(5);
 
     public Table(int numNPCs) {
         for (int i = 0; i < numNPCs; i++) {
@@ -13,16 +13,16 @@ public class Table {
     }
 
     // GETTERS AND SETTERS
-    public ArrayList<Card> getDeck() {
+    public static ArrayList<Card> getDeck() {
         return deck;
     }
 
     // GAMEPLAY
-    public void gameplayLoop() {
+    public static void gameplayLoop() {
 
     }
 
-    public void deal() {
+    public static void deal() {
         for (Player player : players) {
             for (Card card : deck) {
                 for (int i = 0; i < 2; i++) { // Deal 2 cards to each player in the game using the deck
@@ -33,18 +33,18 @@ public class Table {
         }
     }
 
-    public void evaluate() {
+    public static void evaluate() {
 
     }
 
-    public void joinTable(Player playerToJoin) {
+    public static void joinTable(Player playerToJoin) {
         players.add(playerToJoin);
     }
 
     /**
      * Creates whole new deck. Does not shuffle
      */
-    public void newDeck() {
+    public static void newDeck() {
         int index = 0;
 
         for (int i = 1; i < 5; i++) { // Suits
@@ -76,7 +76,7 @@ public class Table {
     /**
      * Shuffles the current deck. Does not create a new deck
      */
-    public void shuffleDeck() {
+    public static void shuffleDeck() {
         ArrayList<Card> shuffled = new ArrayList<Card>(52);
         while (!deck.isEmpty()) {
             int idx = (int)(Math.random() * deck.size());
