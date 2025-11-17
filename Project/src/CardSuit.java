@@ -3,4 +3,5 @@ public enum CardSuit {
     HEART,
     DIAMOND,
     CLUB,
+    DEFAULT
 }

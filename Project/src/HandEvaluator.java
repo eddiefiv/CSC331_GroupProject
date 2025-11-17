@@ -2,10 +2,13 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class HandEvaluator {
-    public static HandType evaluateHand(ArrayList<Card> playerHand, ArrayList<Card> board) {
+    public static EnumMap<HandType, ArrayList<Card>> evaluateHand(ArrayList<Card> playerHand, ArrayList<Card> board) {
         ArrayList<Card> combined = new ArrayList<Card>();
         combined.addAll(playerHand);
         combined.addAll(board);
+
+        // Initialize the EnumMap that will hold the final hand ranking, plus the cards that are associated with that hand (suit is irrelevant, only card value matters)
+        EnumMap<HandType, ArrayList<Card>> handRankingCards = new EnumMap<>(HandType.class);
 
         for (Card card : playerHand) {
             HandType handType = HandType.HIGH_CARD; // Default to high card
@@ -13,13 +16,15 @@ public class HandEvaluator {
             // Only check for royal flush, straight flush, straight, and full house if board has 3 or more cards because those hands need 5 cards to be valid
             if (board.size() >= 3) {
                 HandType flushType = checkFlushes(combined);
-                if (!flushType.equals(HandType.HIGH_CARD)) return flushType;
+                if (!flushType.equals(HandType.HIGH_CARD)) {
+                    handRankingCards.put(handType, new );
+                };
                 //TODO boolean fullHouse = checkFullHouse(combined);
                 //TODO boolean straight = checkStraight(combined);
             }
 
             if (board.size() >= 2) { // Check for four of a kind only if board has 2 or more cards because there needs to be 4 cards to be valid
-                HandType fourOfAKind = checkFourOfAKind(combined);
+                HandType fourOfAKind = checkLikeCards(combined, 4);
                 if (!fourOfAKind.equals(HandType.HIGH_CARD)) return fourOfAKind;
             }
         }
@@ -70,8 +75,18 @@ public class HandEvaluator {
         return flushHand;
     }
 
-    private static HandType checkFourOfAKind(ArrayList<Card> combinedHand) {
+    /**
+     * Checks if there are likeCardsToCheck like cards in the provided combinedHand.
+     *
+     * For example, checkLikeCards(hand, 3) will check if there are 3 of a kind in the hand, similarly
+     * @param combinedHand
+     * @param likeCardsToCheck
+     * @return
+     */
+    private static HandEvaluationResult checkLikeCards(ArrayList<Card> combinedHand, int likeCardsToCheck) {
         EnumMap<CardRank, Integer> frequencyTable = createEmptyRankFrequencyTable();
+        List<CardRank> frequencyKeys = new ArrayList<>(frequencyTable.keySet());
+        Collections.reverse(frequencyKeys); // Reverse keys to be able to iterate in reverse later
 
         // Add 1 to each value for every found key
         for (Card card : combinedHand) {
@@ -79,9 +94,14 @@ public class HandEvaluator {
         }
 
         // If there are 4 or more of a single rank, then there is four of a kind
-        for (Integer frequency : frequencyTable.values()) {
-            if (frequency >= 4) {
-                return HandType.FOUR_OF_A_KIND;
+        // iterate backwards to return the highest possible pair first
+        ArrayList<Card> cardsToReturn = new ArrayList<Card>();
+        for (CardRank rankKey : frequencyKeys) {
+            if (frequencyTable.get(rankKey) >= 4) {
+                for (int i = 0; i < frequencyTable.get(rankKey); i++) {
+                    cardsToReturn.add(combinedHand.get(i)); // TODO GET CARDS FROM COMBINDHAND INSTEAD OF DEFAULT CARDRANK
+                }
+                return new HandEvaluationResult(HandType.FOUR_OF_A_KIND, )
             }
         }
 
