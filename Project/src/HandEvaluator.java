@@ -1,5 +1,8 @@
+/**
+ * @author Eddie Falco
+ */
+
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class HandEvaluator {
     public static EnumMap<HandType, ArrayList<Card>> evaluateHand(ArrayList<Card> playerHand, ArrayList<Card> board) {
@@ -76,9 +79,9 @@ public class HandEvaluator {
     }
 
     /**
-     * Checks if there are likeCardsToCheck like cards in the provided combinedHand.
-     *
-     * For example, checkLikeCards(hand, 3) will check if there are 3 of a kind in the hand, similarly
+     * Checks if there are <i>likeCardsToCheck</i> like cards in the provided combinedHand.
+     * <br>
+     * For example, <i>checkLikeCards(hand, 3)</i> will check if there are 3 of a kind in the hand, similarly
      * @param combinedHand
      * @param likeCardsToCheck
      * @return
