@@ -79,6 +79,13 @@ public class HandEvaluator {
                 highestCard = card;
                 continue;
             }
+
+            // If card is ace (highest possible), immediately return a new HandEvaluationResult with ace
+            if (card.getRank() == CardRank.ACE) {
+                return new HandEvaluationResult(card);
+            }
+
+            // Otherwise, check each card and determine highest one
             if (CardRank.getValueFromRank(card.getRank()) > CardRank.getValueFromRank(highestCard.getRank())) {
                 highestCard = card;
             }
@@ -115,10 +122,10 @@ public class HandEvaluator {
             }
         }
 
-        HandEvaluationResult heartsHandEvaluation = hasFlush(true, true, hearts, CardSuit.HEART);
-        HandEvaluationResult diamondsHandEvaluation = hasFlush(true, true, diamonds, CardSuit.DIAMOND);
-        HandEvaluationResult clubsHandEvaluation = hasFlush(true, true, clubs, CardSuit.CLUB);
-        HandEvaluationResult spadesHandEvaluation = hasFlush(true, true, spades, CardSuit.SPADE);
+        HandEvaluationResult heartsHandEvaluation = hasFlush(hearts, CardSuit.HEART);
+        HandEvaluationResult diamondsHandEvaluation = hasFlush(diamonds, CardSuit.DIAMOND);
+        HandEvaluationResult clubsHandEvaluation = hasFlush(clubs, CardSuit.CLUB);
+        HandEvaluationResult spadesHandEvaluation = hasFlush(spades, CardSuit.SPADE);
 
         // If any of the hands are not DEFAULT (meaning it is a flush of some kind)
         if (heartsHandEvaluation.getHandType() != HandType.DEFAULT
@@ -227,7 +234,10 @@ public class HandEvaluator {
 
         // First check for THREE_OF_A_KIND
         if (threeOfAKindResult.getHandType().equals(HandType.THREE_OF_KIND)) {
-            combinedHandCopy.remove(threeOfAKindResult.getCards()); // Remove the cards
+            // Remove the cards
+            for (Card card : threeOfAKindResult.getCards()) {
+                combinedHandCopy.remove(card);
+            }
 
             HandEvaluationResult onePair = checkLikeCards(combinedHandCopy, 2);
 
@@ -265,7 +275,7 @@ public class HandEvaluator {
                 }
 
                 if (valid) {
-                    return new HandEvaluationResult(HandType.STRAIGHT_FLUSH, cardsToReturn);
+                    return new HandEvaluationResult(HandType.STRAIGHT, cardsToReturn);
                 }
             }
         }
@@ -279,7 +289,10 @@ public class HandEvaluator {
 
         // First check for ONE_PAIR
         if (onePairResult.getHandType().equals(HandType.ONE_PAIR)) {
-            combinedHandCopy.remove(onePairResult.getCards()); // Remove the cards
+            // Remove the cards
+            for (Card card : onePairResult.getCards()) {
+                combinedHandCopy.remove(card);
+            }
 
             HandEvaluationResult secondOnePairResult = checkLikeCards(combinedHandCopy, 2);
 
@@ -302,56 +315,52 @@ public class HandEvaluator {
      * Will check for royal flush, straight flush, or a regular flush
      */
     private static HandEvaluationResult hasFlush(
-            boolean royal,
-            boolean straight,
             boolean[] cards,
             CardSuit suit
     ) {
-        if (royal) { // Royal flush checks for Ace(1), Ten(10), Jack(11), Queen(12), King(13)
-            if (cards[1] && cards[10] && cards[11] && cards[12] && cards[13]) {
-                ArrayList<Card> cardsToReturn = new ArrayList<>();
-                cardsToReturn.add(new Card(suit, CardRank.ACE));
-                cardsToReturn.add(new Card(suit, CardRank.TEN));
-                cardsToReturn.add(new Card(suit, CardRank.JACK));
-                cardsToReturn.add(new Card(suit, CardRank.QUEEN));
-                cardsToReturn.add(new Card(suit, CardRank.KING));
-                return new HandEvaluationResult(HandType.ROYAL_FLUSH, cardsToReturn);
-            }
-        }
-
-        if (straight) { // Straight flush checks for any in succession
-            for (int idx = 0; idx < 10; idx++) {
-                if (cards[idx]) { // If a true is found, check the succeeding 4 values to see if they are true too
-                    ArrayList<Card> cardsToReturn = new ArrayList<>();
-                    boolean valid = true;
-                    for (int offset = idx; offset < idx + 4; offset++) {
-                        if (!cards[offset]) {
-                            valid = false;
-                            break;
-                        }
-                        cardsToReturn.add(new Card(suit, CardRank.getRankFromValue(offset)));
-                    }
-
-                    if (valid) {
-                        return new HandEvaluationResult(HandType.STRAIGHT_FLUSH, cardsToReturn);
-                    }
-                }
-            }
-        } else { // Check for regular flush, only need 5 of same suit
-            int count = 0;
+        // Royal flush checks for Ace(1), Ten(10), Jack(11), Queen(12), King(13)
+        if (cards[1] && cards[10] && cards[11] && cards[12] && cards[13]) {
             ArrayList<Card> cardsToReturn = new ArrayList<>();
-            for (int idx = 0; idx < 14; idx++) {
-                if (cards[idx]) {
-                    count++;
-                    cardsToReturn.add(new Card(suit, CardRank.getRankFromValue(idx)));
+            cardsToReturn.add(new Card(suit, CardRank.ACE));
+            cardsToReturn.add(new Card(suit, CardRank.TEN));
+            cardsToReturn.add(new Card(suit, CardRank.JACK));
+            cardsToReturn.add(new Card(suit, CardRank.QUEEN));
+            cardsToReturn.add(new Card(suit, CardRank.KING));
+            return new HandEvaluationResult(HandType.ROYAL_FLUSH, cardsToReturn);
+        }
+
+        // Straight flush checks for any in succession
+        for (int idx = 0; idx < 10; idx++) {
+            if (cards[idx]) { // If a true is found, check the succeeding 4 values to see if they are true too
+                ArrayList<Card> cardsToReturn = new ArrayList<>();
+                boolean valid = true;
+                for (int offset = idx; offset < idx + 4; offset++) {
+                    if (!cards[offset]) {
+                        valid = false;
+                        break;
+                    }
+                    cardsToReturn.add(new Card(suit, CardRank.getRankFromValue(offset)));
+                }
+
+                if (valid) {
+                    return new HandEvaluationResult(HandType.STRAIGHT_FLUSH, cardsToReturn);
                 }
             }
-
-            if (count >= 5) {
-                return new HandEvaluationResult(HandType.STRAIGHT_FLUSH, cardsToReturn);
-            }
-
         }
+        // Check for regular flush, only need 5 of same suit
+        int count = 0;
+        ArrayList<Card> cardsToReturn = new ArrayList<>();
+        for (int idx = 0; idx < 14; idx++) {
+            if (cards[idx]) {
+                count++;
+                cardsToReturn.add(new Card(suit, CardRank.getRankFromValue(idx)));
+            }
+        }
+
+        if (count >= 5) {
+            return new HandEvaluationResult(HandType.FLUSH, cardsToReturn);
+        }
+
         return new HandEvaluationResult(); // Default if no flush
     }
 

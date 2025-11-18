@@ -3,13 +3,13 @@ public class Driver {
         Player p1 = new Player(750);
 
         p1.addCardToHand(new Card(CardSuit.HEART, CardRank.TEN));
-        p1.addCardToHand(new Card(CardSuit.HEART, CardRank.EIGHT));
+        p1.addCardToHand(new Card(CardSuit.DIAMOND, CardRank.JACK));
 
-        Table.board.add(new Card(CardSuit.HEART, CardRank.NINE));
-        Table.board.add(new Card(CardSuit.SPADE, CardRank.QUEEN));
-        Table.board.add(new Card(CardSuit.SPADE, CardRank.JACK));
-        Table.board.add(new Card(CardSuit.HEART, CardRank.SIX));
-        Table.board.add(new Card(CardSuit.HEART, CardRank.SEVEN));
+        Table.board.add(new Card(CardSuit.SPADE, CardRank.NINE));
+        Table.board.add(new Card(CardSuit.SPADE, CardRank.TWO));
+        Table.board.add(new Card(CardSuit.HEART, CardRank.ACE));
+        Table.board.add(new Card(CardSuit.SPADE, CardRank.FOUR));
+        Table.board.add(new Card(CardSuit.CLUB, CardRank.THREE));
 
         HandEvaluationResult hand = HandEvaluator.evaluateHand(p1.getHand(), Table.board);
 
