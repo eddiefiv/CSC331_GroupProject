@@ -41,7 +41,8 @@ public class HandEvaluationResult {
     @Override
     public String toString() {
         return String.format(
-                "HandType: %s%nCards: %s",
+                "HandType: %s%n" +
+                "Cards: %s",
                 handType,
                 cards
         );
