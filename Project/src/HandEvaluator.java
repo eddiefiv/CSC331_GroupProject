@@ -252,11 +252,11 @@ public class HandEvaluator {
             cardPresence[CardRank.getValueFromRank(card.getRank())] = true;
         }
 
-        for (int idx = 0; idx < 10; idx++) {
+        for (int idx = 1; idx < 10; idx++) {
             if (cardPresence[idx]) { // If a true is found, check the succeeding 4 values to see if they are true too
                 ArrayList<Card> cardsToReturn = new ArrayList<>();
                 boolean valid = true;
-                for (int offset = idx; offset < idx + 4; offset++) {
+                for (int offset = idx; offset < idx + 5; offset++) {
                     if (!cardPresence[offset]) {
                         valid = false;
                         break;
