@@ -10,22 +10,68 @@ public class HandEvaluator {
         combined.addAll(playerHand);
         combined.addAll(board);
 
-        for (Card card : playerHand) {
-            HandType handType = HandType.HIGH_CARD; // Default to high card
+        // Initialize HandEvaluationResults
+        HandEvaluationResult flushType = new HandEvaluationResult();
+        HandEvaluationResult fullHouseResult = new HandEvaluationResult();
+        HandEvaluationResult straightResult = new HandEvaluationResult();
+        HandEvaluationResult fourOfAKindResult = new HandEvaluationResult();
+        HandEvaluationResult twoPairResult = new HandEvaluationResult();
+        HandEvaluationResult threeOfAKindResult = new HandEvaluationResult();
+        HandEvaluationResult onePairResult = new HandEvaluationResult();
 
+        for (Card card : playerHand) {
             // Only check for royal flush, straight flush, straight, and full house if combined has 5 or more cards because those hands need 5 cards to be valid
             if (combined.size() >= 5) {
-                HandEvaluationResult flushType = checkFlushes(combined); // Contains FLUSH, STRAIGHT_FLUSH, and ROYAL FLUSH
-                HandEvaluationResult fullHouse = checkFullHouse(combined);
-                HandEvaluationResult straight = checkStraight(combined);
+                flushType = checkFlushes(combined); // Contains FLUSH, STRAIGHT_FLUSH, and ROYAL FLUSH
+                fullHouseResult = checkFullHouse(combined);
+                straightResult = checkStraight(combined);
             }
 
-            if (combined.size() >= 4) { // Check for four of a kind only if combined 4 or more cards because there needs to be 4 cards to be valid
-                HandEvaluationResult fourOfAKindResult = checkLikeCards(combined, 4);
+            // Check for four of a kind and two pair only if combined 4 or more cards because there needs to be 4 cards to be valid
+            if (combined.size() >= 4) {
+                fourOfAKindResult = checkLikeCards(combined, 4);
+                twoPairResult = checkTwoPair(combined);
             }
+
+            // TODO implement checks for THREE_OF_A_KIND, ONE_PAIR
+            if (combined.size() >= 3) {
+                threeOfAKindResult = checkLikeCards(combined, 3);
+            }
+
+            // Check for one pair regardless of hand size, because player hand will playerHand will always have a size of 2
+            onePairResult = checkLikeCards(combined, 2);
         }
 
-        return null;
+        // Determine which result to return
+        if (flushType.getHandType() != HandType.DEFAULT) {
+            // Special case where full house and flush come before flush, so check if that is the case
+            if (flushType.getHandType() == HandType.FLUSH) {
+                if (fourOfAKindResult.getHandType() ==  HandType.FOUR_OF_A_KIND) {
+                    return fourOfAKindResult;
+                } else if (fullHouseResult.getHandType() == HandType.FULL_HOUSE) {
+                    return fullHouseResult;
+                }
+                // If no four of a kind and no full house, okay to return flushType containing regular flush
+                return flushType;
+            }
+
+            // Return flush type containing either royal flush or straight flush
+            return flushType;
+        } else if(fourOfAKindResult.getHandType() == HandType.FOUR_OF_A_KIND) {
+            return fourOfAKindResult;
+        } else if (fullHouseResult.getHandType() == HandType.FULL_HOUSE) {
+            return fullHouseResult;
+        } else if (straightResult.getHandType() == HandType.STRAIGHT) {
+            return straightResult;
+        } else if (threeOfAKindResult.getHandType() == HandType.THREE_OF_KIND) {
+            return threeOfAKindResult;
+        } else if (twoPairResult.getHandType() == HandType.TWO_PAIR) {
+            return twoPairResult;
+        } else if (onePairResult.getHandType() == HandType.ONE_PAIR) {
+            return onePairResult;
+        }
+
+        return null; // TODO check for highest card to return HIGH_CARD with the corresponding high card
     }
 
     // CHECKS
