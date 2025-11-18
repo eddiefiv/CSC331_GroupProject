@@ -15,6 +15,16 @@ public class HandEvaluationResult {
         this.cards = cards;
     }
 
+    public HandEvaluationResult(Card card) {
+        handType = HandType.HIGH_CARD;
+
+        // Add single card to cards
+        ArrayList<Card> cards = new ArrayList<>();
+        cards.add(card);
+
+        this.cards = cards;
+    }
+
     public HandEvaluationResult() {
         this.handType = HandType.DEFAULT;
         this.cards = null;

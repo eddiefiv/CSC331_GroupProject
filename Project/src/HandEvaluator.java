@@ -71,7 +71,20 @@ public class HandEvaluator {
             return onePairResult;
         }
 
-        return null; // TODO check for highest card to return HIGH_CARD with the corresponding high card
+        // Check for highest card and return result with HIGH_CARD since no other higher hand type was evaluated
+        Card highestCard = null;
+        for (Card card : combined) {
+            // Will only run for the first iterated card
+            if (highestCard == null) {
+                highestCard = card;
+                continue;
+            }
+            if (CardRank.getValueFromRank(card.getRank()) > CardRank.getValueFromRank(highestCard.getRank())) {
+                highestCard = card;
+            }
+        }
+
+        return new HandEvaluationResult(highestCard);
     }
 
     // CHECKS
