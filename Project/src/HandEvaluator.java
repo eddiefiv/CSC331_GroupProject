@@ -273,6 +273,30 @@ public class HandEvaluator {
         return new HandEvaluationResult();
     }
 
+    private static HandEvaluationResult checkTwoPair(ArrayList<Card> combinedHand) {
+        ArrayList<Card> combinedHandCopy = new ArrayList<>(combinedHand); // Copy combinedHand to avoid inadvertently modifying it
+        HandEvaluationResult onePairResult = checkLikeCards(combinedHandCopy, 2);
+
+        // First check for ONE_PAIR
+        if (onePairResult.getHandType().equals(HandType.ONE_PAIR)) {
+            combinedHandCopy.remove(onePairResult.getCards()); // Remove the cards
+
+            HandEvaluationResult secondOnePairResult = checkLikeCards(combinedHandCopy, 2);
+
+            if (secondOnePairResult.getHandType().equals(HandType.ONE_PAIR)) {
+                // Initialize cardsToReturn and add the three of a kind and one pair cards
+                ArrayList<Card> cardsToReturn = new ArrayList<Card>();
+                cardsToReturn.addAll(secondOnePairResult.getCards());
+                cardsToReturn.addAll(onePairResult.getCards());
+
+                return new HandEvaluationResult(HandType.TWO_PAIR, cardsToReturn);
+            }
+        }
+
+        // Return HIGH_CARD if nothing else
+        return new HandEvaluationResult();
+    }
+
     // HELPERS
     /**
      * Will check for royal flush, straight flush, or a regular flush
