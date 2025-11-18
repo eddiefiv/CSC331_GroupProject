@@ -15,6 +15,11 @@ public class HandEvaluationResult {
         this.cards = cards;
     }
 
+    public HandEvaluationResult() {
+        this.handType = HandType.;
+        this.cards = null;
+    }
+
     public HandType getHandType() {
         return handType;
     }

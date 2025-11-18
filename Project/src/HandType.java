@@ -1,4 +1,5 @@
 public enum HandType {
+    DEFAULT(0),
     HIGH_CARD(1),
     ONE_PAIR(2),
     TWO_PAIR(3),
@@ -14,6 +15,7 @@ public enum HandType {
 
     public static int getStrengthValueFromHandType(HandType hand) {
         return switch (hand) {
+            case DEFAULT -> 0;
             case HIGH_CARD -> 1;
             case ONE_PAIR -> 2;
             case TWO_PAIR -> 3;
@@ -30,6 +32,7 @@ public enum HandType {
 
     public static HandType getHandTypeFromStrengthValue(int strength) {
         return switch (strength) {
+            case 0 -> DEFAULT;
             case 1 -> HIGH_CARD;
             case 2 -> ONE_PAIR;
             case 3 -> TWO_PAIR;
