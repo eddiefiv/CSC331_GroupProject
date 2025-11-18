@@ -37,4 +37,13 @@ public class HandEvaluationResult {
     public ArrayList<Card> getCards() {
         return cards;
     }
+
+    @Override
+    public String toString() {
+        return String.format(
+                "HandType: %s%nCards: %s",
+                handType,
+                cards
+        );
+    }
 }
