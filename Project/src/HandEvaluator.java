@@ -25,7 +25,7 @@ public class HandEvaluator {
             }
         }
 
-        return new HandEvaluationResult(HandType.HIGH_CARD, null);
+        return null
     }
 
     // CHECKS
@@ -121,7 +121,7 @@ public class HandEvaluator {
         }
 
         // Otherwise, return HIGH_CARD with the highest card in the hand
-        return new HandEvaluationResult(HandType.HIGH_CARD, null);
+        return null
     }
 
     /**
@@ -151,7 +151,7 @@ public class HandEvaluator {
         }
 
         // Return HIGH_CARD if nothing else
-        return new HandEvaluationResult(HandType.HIGH_CARD, null);
+        return null
     }
 
     private static HandEvaluationResult checkStraight(ArrayList<Card> combinedHand) {
@@ -237,7 +237,7 @@ public class HandEvaluator {
             }
 
         }
-        return new HandEvaluationResult(HandType.HIGH_CARD, null); // Default if no flush
+        return null // Default if no flush
     }
 
     private static EnumMap<CardRank, Integer> createEmptyRankFrequencyTable() {
