@@ -12,7 +12,7 @@ public enum HandType {
 
     HandType(int strength) {}
 
-    public static int getStrengthValueFromHand(HandType hand) {
+    public static int getStrengthValueFromHandType(HandType hand) {
         return switch (hand) {
             case HIGH_CARD -> 1;
             case ONE_PAIR -> 2;
