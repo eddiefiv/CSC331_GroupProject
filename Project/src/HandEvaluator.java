@@ -56,22 +56,54 @@ public class HandEvaluator {
             }
         }
 
-        HandEvaluationResult heartsHand = hasFlush(true, true, hearts, CardSuit.HEART);
-        HandEvaluationResult diamondsHand = hasFlush(true, true, diamonds, CardSuit.DIAMOND);
-        HandEvaluationResult clubsHand = hasFlush(true, true, clubs, CardSuit.CLUB);
-        HandEvaluationResult spadesHand = hasFlush(true, true, spades, CardSuit.SPADE);
+        HandEvaluationResult heartsHandEvaluation = hasFlush(true, true, hearts, CardSuit.HEART);
+        HandEvaluationResult diamondsHandEvaluation = hasFlush(true, true, diamonds, CardSuit.DIAMOND);
+        HandEvaluationResult clubsHandEvaluation = hasFlush(true, true, clubs, CardSuit.CLUB);
+        HandEvaluationResult spadesHandEvaluation = hasFlush(true, true, spades, CardSuit.SPADE);
 
-        HandType flushHandType = HandType.getHandTypeFromStrengthValue(Math.max(
-                HandType.getStrengthValueFromHandType(heartsHand.getHandType()),
-                Math.max(HandType.getStrengthValueFromHandType(diamondsHand.getHandType()),
-                Math.max(HandType.getStrengthValueFromHandType(clubsHand.getHandType()),
-                HandType.getStrengthValueFromHandType(spadesHand.getHandType())))
-        ));
+        // If any of the hands are not DEFAULT (meaning it is a flush of some kind)
+        if (heartsHandEvaluation.getHandType() != HandType.DEFAULT
+                ||diamondsHandEvaluation.getHandType() != HandType.DEFAULT
+                || clubsHandEvaluation.getHandType() != HandType.DEFAULT
+                || spadesHandEvaluation.getHandType() != HandType.DEFAULT) {
+            // Determine the highest flush type by maxing all the hand evaluations' HandTypes together
+            HandType maxFlushHandType = HandType.getHandTypeFromStrengthValue(Math.max(
+                    HandType.getStrengthValueFromHandType(heartsHandEvaluation.getHandType()),
+                    Math.max(HandType.getStrengthValueFromHandType(diamondsHandEvaluation.getHandType()),
+                            Math.max(HandType.getStrengthValueFromHandType(clubsHandEvaluation.getHandType()),
+                                    HandType.getStrengthValueFromHandType(spadesHandEvaluation.getHandType())))
+            ));
 
-        switch (flushHandType) {
-            case ROYAL_FLUSH:
+            // Determine the suit with the highest flush type
+            CardSuit highestSuit = CardSuit.HEART; // Initialize as HEART
+            HandType highestType = heartsHandEvaluation.getHandType(); // Initialize as the hearts
 
+            // If diamondsHand has a higher Type than the current high
+            if (HandType.getStrengthValueFromHandType(diamondsHandEvaluation.getHandType()) > HandType.getStrengthValueFromHandType(highestType)) {
+                highestSuit = CardSuit.DIAMOND;
+                highestType = diamondsHandEvaluation.getHandType();
+            }
+
+            // If clubsHand has a higher Type than the current high
+            if (HandType.getStrengthValueFromHandType(clubsHandEvaluation.getHandType()) > HandType.getStrengthValueFromHandType(highestType)) {
+                highestSuit = CardSuit.CLUB;
+                highestType = clubsHandEvaluation.getHandType();
+            }
+
+            // If spadesHand has a higher Type than the current high
+            if (HandType.getStrengthValueFromHandType(spadesHandEvaluation.getHandType()) > HandType.getStrengthValueFromHandType(highestType)) {
+                highestSuit = CardSuit.SPADE;
+            }
+
+            // Return the proper HandEvaluationResult after determining the highest flush type and suit
+            switch (maxFlushHandType) {
+                case ROYAL_FLUSH, STRAIGHT_FLUSH, FLUSH:
+                    return determineFinalFlushEvaluationResult(heartsHandEvaluation, diamondsHandEvaluation, clubsHandEvaluation, spadesHandEvaluation, highestSuit);
+            }
         }
+
+        // Default return if no flushes
+        return new HandEvaluationResult();
     }
 
     /**
@@ -121,7 +153,7 @@ public class HandEvaluator {
         }
 
         // Otherwise, return HIGH_CARD with the highest card in the hand
-        return null
+        return new HandEvaluationResult();
     }
 
     /**
@@ -151,7 +183,7 @@ public class HandEvaluator {
         }
 
         // Return HIGH_CARD if nothing else
-        return null;
+        return new HandEvaluationResult();
     }
 
     private static HandEvaluationResult checkStraight(ArrayList<Card> combinedHand) {
@@ -179,7 +211,7 @@ public class HandEvaluator {
             }
         }
 
-        return null;
+        return new HandEvaluationResult();
     }
 
     // HELPERS
@@ -237,7 +269,22 @@ public class HandEvaluator {
             }
 
         }
-        return null; // Default if no flush
+        return new HandEvaluationResult(); // Default if no flush
+    }
+
+    private static HandEvaluationResult determineFinalFlushEvaluationResult(HandEvaluationResult heartsHandEvaluation, HandEvaluationResult diamondsHandEvaluation, HandEvaluationResult clubsHandEvaluation, HandEvaluationResult spadesHandEvaluation, CardSuit highestSuit) {
+        switch (highestSuit) {
+            case HEART:
+                return heartsHandEvaluation;
+            case DIAMOND:
+                return diamondsHandEvaluation;
+            case CLUB:
+                return clubsHandEvaluation;
+            case SPADE:
+                return spadesHandEvaluation;
+            default:
+                return new HandEvaluationResult();
+        }
     }
 
     private static EnumMap<CardRank, Integer> createEmptyRankFrequencyTable() {
