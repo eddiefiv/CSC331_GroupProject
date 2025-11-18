@@ -11,7 +11,7 @@ public class Driver {
         Table.board.add(new Card(CardSuit.CLUB, CardRank.SIX));
         Table.board.add(new Card(CardSuit.HEART, CardRank.KING));
 
-        HandType hand = HandEvaluator.evaluateHand(p1.getHand(), Table.board);
+        HandEvaluationResult hand = HandEvaluator.evaluateHand(p1.getHand(), Table.board);
 
         System.out.println(hand);
     }
