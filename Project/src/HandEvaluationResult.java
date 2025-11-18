@@ -16,7 +16,7 @@ public class HandEvaluationResult {
     }
 
     public HandEvaluationResult() {
-        this.handType = HandType.;
+        this.handType = HandType.DEFAULT;
         this.cards = null;
     }
 
