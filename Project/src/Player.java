@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.EnumMap;
 
 public class Player {
+    private String playerName;
     public EnumMap<ChipValue, Integer> chips; // key = chip, value = number of that chip
     private int balance;
     private ArrayList<Card> hand = new ArrayList<Card>();
@@ -13,8 +14,10 @@ public class Player {
     private boolean isActiveTurn; // Is it the player's turn
     private boolean isActivelyPlaying; // Is the player still in the game (if they folded, this is false)
 
-    public Player() {
+    public Player(String playerName) {
         int defaultBalance = 1000;
+
+        this.playerName = playerName;
 
         this.chips = new EnumMap<>(ChipValue.class);
 
@@ -24,8 +27,10 @@ public class Player {
         setIsBigBlind(false);
     }
 
-    public Player(int initialBalance) {
+    public Player(String playerName, int initialBalance) {
         this.chips = new EnumMap<>(ChipValue.class);
+
+        this.playerName = playerName;
 
         setBalance(initialBalance);
         setChips(initialBalance);
@@ -34,6 +39,10 @@ public class Player {
     }
 
     // GETTERS AND SETTERS
+    public String getPlayerName() {
+        return playerName;
+    }
+
     public ArrayList<Card> getHand() {
         return hand;
     }
@@ -158,12 +167,13 @@ public class Player {
 
     }
 
-    public void raise(int currentTableBet) {
+    public void raise(int amountToRaise) {
         // First prompt the user if they want to raise
+        Table.setPot(Table.getPot() + amountToRaise);
     }
 
     public void fold() {
-
+        isActivelyPlaying = false;
     }
 
     @Override

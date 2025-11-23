@@ -1,9 +1,17 @@
 public class Driver {
     public static void main(String[] args) {
-        Player p1 = new Player(750);
+        ControllablePlayer p1 = new ControllablePlayer("Player 1", 750);
+        ControllablePlayer p2 = new ControllablePlayer("Player 2", 500);
 
-        HandEvaluationResult hand = HandEvaluator.evaluateHand(p1.getHand(), Table.board);
+        Table.tableInit(5);
+        Table.joinTable(p1);
+        Table.joinTable(p2);
 
-        System.out.println(hand);
+        System.out.println(p1.getHand());
+
+        Table.gameplayLoop();
+
+        System.out.println(p1.getHand());
+        System.out.println(p2.getHand());
     }
 }
