@@ -4,10 +4,8 @@
 * Date: 11/23/2025
 * Purpose: Establish the values of the chips
 */
-/**
-* Sets the values of all chip types
-*/
 public enum ChipValue {
+    //List of chip types
     ONE(1),
     FIVE(5),
     TEN(10),
