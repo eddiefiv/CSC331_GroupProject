@@ -22,7 +22,10 @@ public enum CardRank {
     KING(13);
 
     private CardRank(int value) {}
-
+    /**
+    * Function to return the rank of a card based on its value
+    * @param value a number value from 1 - 13 (int)
+    */
     public static CardRank getRankFromValue(int value) {
         return switch (value) {
             case 1 -> ACE;
@@ -41,7 +44,10 @@ public enum CardRank {
             default -> throw new IllegalStateException("Unexpected value: " + value);
         };
     }
-
+    /**
+    * Function to return the value of a card based on its rank
+    * @param rank the rank of a card (CardRank)
+    */
     public static int getValueFromRank(CardRank rank) {
         return switch (rank) {
             case ACE -> 1;
