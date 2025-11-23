@@ -1,10 +1,13 @@
 import java.util.ArrayList;
 
 public class Table {
-    private ArrayList<Player> players = new ArrayList<Player>();
-    private int pot;
-    private ArrayList<Card> deck =  new ArrayList<Card>(52);
-    public ArrayList<Card> board = new ArrayList<Card>(5);
+    private final int BIG_BLIND_AMOUNT = 10;
+    private final int SMALL_BLIND_AMOUNT = 5;
+
+    private static ArrayList<Player> players = new ArrayList<Player>();
+    private static int pot;
+    private static ArrayList<Card> deck =  new ArrayList<Card>(52);
+    public static ArrayList<Card> board = new ArrayList<Card>(5);
 
     public Table(int numNPCs) {
         for (int i = 0; i < numNPCs; i++) {
@@ -13,16 +16,32 @@ public class Table {
     }
 
     // GETTERS AND SETTERS
-    public ArrayList<Card> getDeck() {
+    public static ArrayList<Card> getDeck() {
         return deck;
     }
 
     // GAMEPLAY
-    public void gameplayLoop() {
+    public static void gameplayLoop() {
+        boolean running = true;
+
+        while (running) {
+            // TODO loop through each player continuously, prompting for raises, calls, folds, etc. Break (set running to false) the loop when all players fold or one wins
+        }
 
     }
 
-    public void deal() {
+    private static void startGame() {
+        // Set small and big blind first
+        players.get(0).setIsSmallBlind(true); // Set the first player (player to left of dealer, who is not a player but the Table itself) to be small blind
+        players.get(0).raise()
+        players.get(1).setIsBigBlind(true); // Set the player to the left of the first player to be big blind
+
+        players.get(2).setActiveTurn(true); // Set the third player to be the active player
+
+        // TODO initial setup
+    }
+
+    public static void deal() {
         for (Player player : players) {
             for (Card card : deck) {
                 for (int i = 0; i < 2; i++) { // Deal 2 cards to each player in the game using the deck
@@ -33,39 +52,35 @@ public class Table {
         }
     }
 
-    public void evaluate() {
-
+    /**
+     * To be run every time a new card is added to the community card hand, or the player receives their hand
+     */
+    public static void evaluate() {
+        for (Player player : players) {
+            player.setHandEvaluation(HandEvaluator.evaluateHand(player.getHand(), Table.board));
+        }
     }
 
-    public void joinTable(Player playerToJoin) {
+    public static void joinTable(Player playerToJoin) {
         players.add(playerToJoin);
     }
 
     /**
      * Creates whole new deck. Does not shuffle
      */
-    public void newDeck() {
+    public static void newDeck() {
         int index = 0;
 
         for (int i = 1; i < 5; i++) { // Suits
             for (int j = 1; j < 14; j++) { // 1-Ace
                 CardRank rank = CardRank.getRankFromValue(j);
-                CardSuit suit = null;
-
-                switch (i) {
-                    case 1:
-                        suit =  CardSuit.HEART;
-                        break;
-                    case 2:
-                        suit =  CardSuit.DIAMOND;
-                        break;
-                    case 3:
-                        suit =  CardSuit.CLUB;
-                        break;
-                    case 4:
-                        suit =  CardSuit.SPADE;
-                        break;
-                }
+                CardSuit suit = switch (i) {
+                    case 1 -> CardSuit.HEART;
+                    case 2 -> CardSuit.DIAMOND;
+                    case 3 -> CardSuit.CLUB;
+                    case 4 -> CardSuit.SPADE;
+                    default -> null;
+                };
 
                 Card card = new Card(suit, rank);
                 deck.add(card);
@@ -76,7 +91,7 @@ public class Table {
     /**
      * Shuffles the current deck. Does not create a new deck
      */
-    public void shuffleDeck() {
+    public static void shuffleDeck() {
         ArrayList<Card> shuffled = new ArrayList<Card>(52);
         while (!deck.isEmpty()) {
             int idx = (int)(Math.random() * deck.size());

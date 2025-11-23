@@ -5,6 +5,13 @@ public class Player {
     public EnumMap<ChipValue, Integer> chips; // key = chip, value = number of that chip
     private int balance;
     private ArrayList<Card> hand = new ArrayList<Card>();
+    private HandEvaluationResult handEvaluation = null;
+
+    // Boolean attributes for state checking
+    private boolean isSmallBlind; // Is the player the current small blind
+    private boolean isBigBlind; // Is the player the current big blind
+    private boolean isActiveTurn; // Is it the player's turn
+    private boolean isActivelyPlaying; // Is the player still in the game (if they folded, this is false)
 
     public Player() {
         int defaultBalance = 1000;
@@ -13,6 +20,8 @@ public class Player {
 
         setBalance(defaultBalance);
         setChips(defaultBalance);
+        setIsSmallBlind(false);
+        setIsBigBlind(false);
     }
 
     public Player(int initialBalance) {
@@ -20,16 +29,21 @@ public class Player {
 
         setBalance(initialBalance);
         setChips(initialBalance);
+        setIsSmallBlind(false);
+        setIsBigBlind(false);
     }
 
     // GETTERS AND SETTERS
-
     public ArrayList<Card> getHand() {
         return hand;
     }
 
     public void setHand(ArrayList<Card> hand) {
         this.hand = hand;
+    }
+
+    public EnumMap<ChipValue, Integer> getChips() {
+        return chips;
     }
 
     public void setChips(int balance) {
@@ -78,8 +92,44 @@ public class Player {
         this.chips.put(ChipValue.ONE_THOUSAND, this.chips.getOrDefault(ChipValue.ONE_THOUSAND, 0) + numOfOneThousands);
     }
 
+    public int getBalance() {
+        return balance;
+    }
+
     public void setBalance(int balance) {
         this.balance = balance;
+    }
+
+    public boolean isSmallBlind() {
+        return isSmallBlind;
+    }
+
+    public void setIsSmallBlind(boolean isSmallBlind) {
+        this.isSmallBlind = isSmallBlind;
+    }
+
+    public boolean isBigBlind() {
+        return isBigBlind;
+    }
+
+    public void setIsBigBlind(boolean isBigBlind) {
+        this.isBigBlind = isBigBlind;
+    }
+
+    public boolean isActiveTurn() {
+        return isActiveTurn;
+    }
+
+    public void setActiveTurn(boolean activeTurn) {
+        isActiveTurn = activeTurn;
+    }
+
+    public HandEvaluationResult getHandEvaluation() {
+        return handEvaluation;
+    }
+
+    public void setHandEvaluation(HandEvaluationResult handEvaluation) {
+        this.handEvaluation = handEvaluation;
     }
 
     // UTILITIES
@@ -108,15 +158,11 @@ public class Player {
 
     }
 
-    public void raise() {
-
+    public void raise(int currentTableBet) {
+        // First prompt the user if they want to raise
     }
 
     public void fold() {
-
-    }
-
-    public void deal() {
 
     }
 
