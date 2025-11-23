@@ -8,7 +8,6 @@ import javafx.scene.image.ImageView;
 public class PokerController {
 
     //Community Cards
-    @application.FXML
     private ImageView comCard1;
     @FXML private ImageView comCard2;
     @FXML private ImageView comCard3;
@@ -38,14 +37,11 @@ public class PokerController {
     private Table table;
     private Player human;
     private NPC npc;
-    private Deck deck;
 
     @FXML
     private void initialize(){
-        deck = new Deck();
-        human = new Player("Human", 1000);
-        npc = new NPC("Dealer", 1000);
-        table = new Table(human, npc, deck);
+        //human = new Player("Human", 1000);
+        //npc = new NPC("Dealer", 1000);
 
         updateLabels();
         loadBackImages();
@@ -68,21 +64,21 @@ public class PokerController {
     private void updateLabels(){
         playerChipLabel.setText("Your Chips: $" + human.getChips());
         npcChipLabel.setText("NPC Chips: $" + npc.getChips());
-        potLabel.setText("$" + table.getPot);
+        potLabel.setText("$" + Table.getPot());
     }
 
     @FXML
     private void onDeal(){
 
         //Player cards
-        table.startRound();
-        playerCard1.setImage(new Image(table.getHumanCard1().getImagePath()));
-        playerCard2.setImage(new Image(table.getHumanCard2().getImagePath()));
+        Table.startGame();
+        playerCard1.setImage(new Image("/images/back.png"));
+        playerCard2.setImage(new Image("/images/back.png"));
 
         //NPC face down
         Image back = new Image("/images/back.png");
         npcCard1.setImage(back);
-        npcCard2.setIamge(back);
+        npcCard2.setImage(back);
 
         //Community cards blank until flop
         comCard1.setImage(null);
@@ -96,19 +92,19 @@ public class PokerController {
 
     @FXML
     private void onBet(){
-        table.bet(human, 50);
+        //Table.bet(human, 50);
         updateLabels();
     }
 
     @FXML
     private void onRaise(){
-        table.raise(human, 100);
+        //Table.raise(human, 100);
         updateLabels();
     }
 
     @FXML
     private void onFold(){
-        table.fold(human);
+        //Table.fold(human);
         updateLabels();
         loadBackImages();
     }
