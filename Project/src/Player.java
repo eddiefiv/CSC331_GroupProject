@@ -171,32 +171,55 @@ public class Player {
     public void setIsBigBlind(boolean isBigBlind) {
         this.isBigBlind = isBigBlind;
     }
-    
+    /**
+    * Function to se if it is an active turn
+    * @return isActiveTurn
+    */
     public boolean isActiveTurn() {
         return isActiveTurn;
     }
-
+    /**
+    * Function to set the turn as active
+    * @param activeTurn it is an active turn (boolean)
+    */
     public void setActiveTurn(boolean activeTurn) {
         isActiveTurn = activeTurn;
     }
-
+    /**
+     * Function to get the hand evaluation
+     * @return handEvaluation
+     */
     public HandEvaluationResult getHandEvaluation() {
         return handEvaluation;
     }
-
+    /**
+    * Function to set the hand evaluation
+    * @param handEvaluation handEvaluation (HandEvaluationResult)
+    */
     public void setHandEvaluation(HandEvaluationResult handEvaluation) {
         this.handEvaluation = handEvaluation;
     }
 
     // UTILITIES
+    /**
+     * Function to add chips to the Player's pot
+     * @param chipValue chipValue
+     * @param amount amount of chips to add (int)
+     */
     public void addChip(ChipValue chipValue, int amount) {
         this.chips.put(chipValue, this.chips.getOrDefault(chipValue, 0) + amount);
     }
-
+    /**
+     * Function for adding a card to the Player's hand
+     * @param card card
+     */
     public void addCardToHand(Card card) {
         hand.add(card);
     }
-
+    /**
+     * Function for calculating the players chips
+     * @return total (int)
+     */
     public int calculateBalance() {
         int total = 0;
 
@@ -213,12 +236,17 @@ public class Player {
     public void call() {
 
     }
-
+    /**
+     * Function to raise the bets
+     * @param amountToRaise integer of how much to raise the bet
+     */
     public void raise(int amountToRaise) {
         // First prompt the user if they want to raise
         Table.setPot(Table.getPot() + amountToRaise);
     }
-
+    /**
+     * Function for the Player to fold
+     */
     public void fold() {
         isActivelyPlaying = false;
     }
