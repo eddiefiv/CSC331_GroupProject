@@ -1,4 +1,11 @@
+/**
+* @author Emma Fox, Eddie Falco
+* CSC 331 Section 001 - 002 - 003
+* Date: 11/23/2025
+* Purpose: Establish the values of all hand types
+*/
 public enum HandType {
+    //List of all hand types and their values
     DEFAULT(0),
     HIGH_CARD(1),
     ONE_PAIR(2),
@@ -12,7 +19,10 @@ public enum HandType {
     ROYAL_FLUSH(10);
 
     HandType(int strength) {}
-
+    /**
+    * Function to return the value given the hand type
+    * @param hand the combination of cards (HandType)
+    */
     public static int getStrengthValueFromHandType(HandType hand) {
         return switch (hand) {
             case DEFAULT -> 0;
@@ -29,7 +39,10 @@ public enum HandType {
             default -> throw new IllegalStateException("Unexpected value: " + hand);
         };
     }
-
+    /**
+    * Function to return the hand type given the value
+    * @param strength the value of the hand (int)
+    */
     public static HandType getHandTypeFromStrengthValue(int strength) {
         return switch (strength) {
             case 0 -> DEFAULT;
