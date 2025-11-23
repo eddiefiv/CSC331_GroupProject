@@ -1,4 +1,12 @@
+/**
+* @author Emma Fox, Eddie Falco
+* CSC 331 Section 001 - 002 - 003
+* Date: 11/23/2025
+* Purpose: Establish the value of the cards
+*/
+
 public enum CardRank {
+    //List of card ranks
     ACE(1),
     TWO(2),
     THREE(3),
