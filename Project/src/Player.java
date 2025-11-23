@@ -1,6 +1,12 @@
 import java.util.ArrayList;
 import java.util.EnumMap;
 
+/**
+ * @author James Frink, Eddie Falco
+ * CSC 331 Section 001 - 002 - 003
+ * Date: 11/23/2025
+ * Purpose: Create a builder for the Players
+ */
 public class Player {
     private String playerName;
     public EnumMap<ChipValue, Integer> chips; // key = chip, value = number of that chip
