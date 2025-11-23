@@ -33,7 +33,6 @@ public class HandEvaluator {
                 twoPairResult = checkTwoPair(combined);
             }
 
-            // TODO implement checks for THREE_OF_A_KIND, ONE_PAIR
             if (combined.size() >= 3) {
                 threeOfAKindResult = checkLikeCards(combined, 3);
             }

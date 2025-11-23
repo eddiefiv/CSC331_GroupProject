@@ -1,6 +1,9 @@
 import java.util.ArrayList;
 
 public class Table {
+    private final int BIG_BLIND_AMOUNT = 10;
+    private final int SMALL_BLIND_AMOUNT = 5;
+
     private static ArrayList<Player> players = new ArrayList<Player>();
     private static int pot;
     private static ArrayList<Card> deck =  new ArrayList<Card>(52);
@@ -19,7 +22,23 @@ public class Table {
 
     // GAMEPLAY
     public static void gameplayLoop() {
+        boolean running = true;
 
+        while (running) {
+            // TODO loop through each player continuously, prompting for raises, calls, folds, etc. Break (set running to false) the loop when all players fold or one wins
+        }
+
+    }
+
+    private static void startGame() {
+        // Set small and big blind first
+        players.get(0).setIsSmallBlind(true); // Set the first player (player to left of dealer, who is not a player but the Table itself) to be small blind
+        players.get(0).raise()
+        players.get(1).setIsBigBlind(true); // Set the player to the left of the first player to be big blind
+
+        players.get(2).setActiveTurn(true); // Set the third player to be the active player
+
+        // TODO initial setup
     }
 
     public static void deal() {
@@ -33,8 +52,13 @@ public class Table {
         }
     }
 
+    /**
+     * To be run every time a new card is added to the community card hand, or the player receives their hand
+     */
     public static void evaluate() {
-
+        for (Player player : players) {
+            player.setHandEvaluation(HandEvaluator.evaluateHand(player.getHand(), Table.board));
+        }
     }
 
     public static void joinTable(Player playerToJoin) {
@@ -50,22 +74,13 @@ public class Table {
         for (int i = 1; i < 5; i++) { // Suits
             for (int j = 1; j < 14; j++) { // 1-Ace
                 CardRank rank = CardRank.getRankFromValue(j);
-                CardSuit suit = null;
-
-                switch (i) {
-                    case 1:
-                        suit =  CardSuit.HEART;
-                        break;
-                    case 2:
-                        suit =  CardSuit.DIAMOND;
-                        break;
-                    case 3:
-                        suit =  CardSuit.CLUB;
-                        break;
-                    case 4:
-                        suit =  CardSuit.SPADE;
-                        break;
-                }
+                CardSuit suit = switch (i) {
+                    case 1 -> CardSuit.HEART;
+                    case 2 -> CardSuit.DIAMOND;
+                    case 3 -> CardSuit.CLUB;
+                    case 4 -> CardSuit.SPADE;
+                    default -> null;
+                };
 
                 Card card = new Card(suit, rank);
                 deck.add(card);
