@@ -19,7 +19,10 @@ public class Player {
     private boolean isBigBlind; // Is the player the current big blind
     private boolean isActiveTurn; // Is it the player's turn
     private boolean isActivelyPlaying; // Is the player still in the game (if they folded, this is false)
-
+    /**
+     * Player Constructor
+     * @param playerName player's name (String)
+     */
     public Player(String playerName) {
         int defaultBalance = 1000;
 
@@ -32,7 +35,11 @@ public class Player {
         setIsSmallBlind(false);
         setIsBigBlind(false);
     }
-
+    /**
+     * Player Constructor
+     * @param playerName player's name (String)
+     * @param initialBalance amount of chips the player starts with (int)
+     */
     public Player(String playerName, int initialBalance) {
         this.chips = new EnumMap<>(ChipValue.class);
 
@@ -45,22 +52,38 @@ public class Player {
     }
 
     // GETTERS AND SETTERS
+    /**
+     * Function to get playerName
+     * @return playerName
+     */
     public String getPlayerName() {
         return playerName;
     }
-
+    /**
+     * Function to set hand
+     * @param hand the cards the Player has (ArrayList<Card>)
+     */
     public ArrayList<Card> getHand() {
         return hand;
     }
-
+    /**
+     * Function to set hand
+     * @param hand the cards the Player has (ArrayList<Card>)
+     */
     public void setHand(ArrayList<Card> hand) {
         this.hand = hand;
     }
-
+    /**
+     * Function to return chips
+     * @return chips
+     */
     public EnumMap<ChipValue, Integer> getChips() {
         return chips;
     }
-
+    /**
+     * Function to set chips
+     * @param balance balance (int)
+     */
     public void setChips(int balance) {
         int numOfOneThousands = 0;
         int numOfFiveHundreds = 0;
@@ -106,31 +129,49 @@ public class Player {
         this.chips.put(ChipValue.FIVE_HUNDRED, this.chips.getOrDefault(ChipValue.FIVE_HUNDRED, 0) + numOfFiveHundreds);
         this.chips.put(ChipValue.ONE_THOUSAND, this.chips.getOrDefault(ChipValue.ONE_THOUSAND, 0) + numOfOneThousands);
     }
-
+    /**
+     * Function to get the balance
+     * @return balance
+     */
     public int getBalance() {
         return balance;
     }
-
+    /**
+    * Function to set the balance
+    * @param balance balance (int)
+    */
     public void setBalance(int balance) {
         this.balance = balance;
     }
-
+    /**
+    * Function to see if it is a small blind
+    * @return isSmallBlind
+    */
     public boolean isSmallBlind() {
         return isSmallBlind;
     }
-
+    /**
+    * Function to set the blind as a small blind
+    * @param isSmallBlind isSmallBlind (boolean)
+    */
     public void setIsSmallBlind(boolean isSmallBlind) {
         this.isSmallBlind = isSmallBlind;
     }
-
+    /**
+    * Function to see if it is a big blind
+    * @return isBigBlind
+    */
     public boolean isBigBlind() {
         return isBigBlind;
     }
-
+    /**
+    * Function to set the blind to a big blind
+    * @param isBigBlind isBigBlind (boolean)
+    */
     public void setIsBigBlind(boolean isBigBlind) {
         this.isBigBlind = isBigBlind;
     }
-
+    
     public boolean isActiveTurn() {
         return isActiveTurn;
     }
