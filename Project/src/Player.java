@@ -3,8 +3,10 @@ import java.util.EnumMap;
 
 public class Player {
     private String playerName;
-    public EnumMap<ChipValue, Integer> chips; // key = chip, value = number of that chip
     private int balance;
+    private int bet;
+
+    public EnumMap<ChipValue, Integer> chips; // key = chip, value = number of that chip
     private ArrayList<Card> hand = new ArrayList<Card>();
     private HandEvaluationResult handEvaluation = null;
 
@@ -49,6 +51,14 @@ public class Player {
 
     public void setHand(ArrayList<Card> hand) {
         this.hand = hand;
+    }
+
+    public int getBet() {
+        return bet;
+    }
+
+    public void setBet(int bet) {
+        this.bet = bet;
     }
 
     public EnumMap<ChipValue, Integer> getChips() {
@@ -163,13 +173,16 @@ public class Player {
     }
 
     // ---- GAMEPLAY ----
-    public void call() {
-
+    public void call(int howMuchToCall) {
+        //
+        Table.setPot(Table.getPot() + howMuchToCall);
+        setBet(getBet() + howMuchToCall);
     }
 
     public void raise(int amountToRaise) {
         // First prompt the user if they want to raise
         Table.setPot(Table.getPot() + amountToRaise);
+        setBet(getBet() + amountToRaise);
     }
 
     public void fold() {

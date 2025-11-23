@@ -5,7 +5,6 @@
  */
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Scanner;
 
 public class Table {
@@ -46,22 +45,22 @@ public class Table {
     public static void gameplayLoop() {
         // This loop manages the whole Table's lifespan
         int currentBigBlindIdx;
+
         while (true) {
             // First, generate a new deck, shuffle it, then start the game
             newDeck();
             shuffleDeck();
             startGame();
-            break;
-            /**
+
             // TODO loop through each player continuously, prompting for raises, calls, folds, etc. Break (set running to false) the loop when all players fold or one wins
             boolean running = true;
+
             // This loop manages a single round
             while (running) {
                 for (Player player : players) {
 
                 }
             }
-             */
         }
 
     }
@@ -91,14 +90,13 @@ public class Table {
         if (player instanceof ControllablePlayer) {
             promptPlayerForTurn(player);
         } else if (player instanceof NPC) {
-            handleNPCTurn(player);
+            handleNPCTurn((NPC) player);
         }
     }
 
     private static void promptPlayerForTurn(Player player) {
         System.out.println(player.getPlayerName() + "'s hand: " + player.getHand());
         System.out.println("What move would you like to make? (fold, call, raise)");
-
 
         // TODO create visual prompts to let the ControllablePlayer pick their turn
         Scanner scanner = new Scanner(System.in);
@@ -114,21 +112,57 @@ public class Table {
                     checking = false;
                     break;
                 case "call":
-                    player.call();
+                    player.call(currentBet - player.getBet());
+                    System.out.printf("%s called by $%d%n",  player.getPlayerName(), currentBet -  player.getBet());
                     checking = false;
                     break;
                 case "raise":
-                    player.raise(currentBet);
-                    checking = false;
+                    while (true) {
+                        System.out.printf("How much would you like to raise the bet? (0-%d)%n", player.getBalance());
+                        int amountToRaise = scanner.nextInt();
+
+                        if (amountToRaise >= 0 && amountToRaise <= player.getBalance()) {
+                            player.raise(currentBet);
+                            System.out.printf("%s raised their bet by $%d%n",  player.getPlayerName(), currentBet);
+                            checking = false;
+                            break;
+                        }
+                    }
+
                     break;
                 default:
-                    System.out.printf("%s is not a valid action, available actions are 'fold', 'call', and 'raise'.", playerMove);
+                    System.out.printf("'%s' is not a valid action, available actions are 'fold', 'call', and 'raise'.%n", playerMove);
             }
         }
     }
 
-    private static void handleNPCTurn(Player player) {
+    private static void handleNPCTurn(NPC player) {
+        // Create a NPCState to be used in the NPCStrategy inference
+        NPCState npcState = new  NPCState();
+        npcState.callAmount = currentBet - player.getBet();
+        npcState.canCheck = currentBet == player.getBet();
+        npcState.potSize = getPot();
+        npcState.currentBet =  player.getBet();
+        npcState.handStrength = HandEvaluator.evaluateHand(player.getHand(), board);
+        npcState.chips = player.getChips();
+        npcState.playersRemaining = 0; // Doesn't matter
         System.out.println(player.getPlayerName() + "'s hand: " + player.getHand());
+
+        PlayerAction playerAction = player.getStrategy().inference(npcState);
+
+        switch (playerAction) {
+            case PlayerAction.FOLD:
+                player.fold();
+                break;
+            case PlayerAction.CALL:
+                player.call(npcState.callAmount);
+                break;
+            case PlayerAction.RAISE:
+                player.raise(npcState.currentBet); // NPCs raise 20% of their portion of the pot (their current bet)
+                break;
+            default:
+
+        }
     }
 
     public static void deal() {

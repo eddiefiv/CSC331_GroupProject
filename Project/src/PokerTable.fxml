@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
+<!-- Author: Emma Fox -->
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.* ?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.geometry.Insets?>
 
 <BorderPane xmlns:fx="http://javafx.com/fxml"
-            fx:controller="application.PokerController"
+            fx:controller="PokerController"
             prefWidth="1000" prefHeight="700"
             style="-fx-background-color: #13e13">
-
     <top>
         <VBox alignment="CENTER" spacing="10" BorderPane.alignment="CENTER">
             <Label text="Dealer / NPC" style="-fx-text-fill:white; -fx-font-size: 20px;"/>
