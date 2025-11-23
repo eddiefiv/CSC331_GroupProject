@@ -1,5 +1,5 @@
 /**
-* @author
+* @author James Frink, Eddie Falco
 * CSC 331 Section 001- 002- 003
 * Date: 11/23/2025
 * Purpose: Create the builder for Non Player Characters (NPCs)
