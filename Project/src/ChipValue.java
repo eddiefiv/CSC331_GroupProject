@@ -1,3 +1,12 @@
+/**
+* @author Emma Fox, Eddie Falco
+* CSC 331 Section 001 - 002 - 003
+* Date: 11/23/2025
+* Purpose: Establish the values of the chips
+*/
+/**
+* Sets the values of all chip types
+*/
 public enum ChipValue {
     ONE(1),
     FIVE(5),
@@ -10,7 +19,10 @@ public enum ChipValue {
     ChipValue(int i) {
         // TODO Auto-generated constructor stub
     }
-
+    /**
+    * Function to return the values of certain chips
+    * @param chipValue value of a given chip (ChipValue)
+    */
     public static int getChipNumberValue(ChipValue chipValue) {
         return switch (chipValue) {
             case ONE -> 1;
