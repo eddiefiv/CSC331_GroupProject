@@ -1,3 +1,9 @@
+/**
+ * Test driver class, not the main driver for FXML, though
+ *
+ * @author Eddie Falco
+ */
+
 public class Driver {
     public static void main(String[] args) {
 

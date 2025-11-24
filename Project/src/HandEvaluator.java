@@ -1,10 +1,21 @@
 /**
+ * The main class that handles all hand evaluations.
+ * Collection of methods to determine a Player's hand quality and strength
+ *
  * @author Eddie Falco
  */
 
 import java.util.*;
 
 public class HandEvaluator {
+    /**
+     * Evaluate a Player's hand, taking in the Player's hand and the Table's hand (board).
+     * Determines the highest HandType that the player has and returns a HandEvaluationResult
+     *
+     * @param playerHand the Player's hand
+     * @param board the Table's hand
+     * @return HandEvaluationResult the result of the evaluation
+     */
     public static HandEvaluationResult evaluateHand(ArrayList<Card> playerHand, ArrayList<Card> board) {
         ArrayList<Card> combined = new ArrayList<Card>();
         combined.addAll(playerHand);
@@ -93,6 +104,12 @@ public class HandEvaluator {
         return new HandEvaluationResult(highestCard);
     }
 
+    /**
+     * Checking for all different flushes (ROYAL_FLUSH, STRAIGHT_FLUSH, FLUSH)
+     *
+     * @param combinedHand Player's hand plus Table's hand
+     * @return HandEvaluationResult the highest flush found, if any, otherwise HIGH_CARD result
+     */
     // CHECKS
     private static HandEvaluationResult checkFlushes(ArrayList<Card> combinedHand) {
         // Boolean arrays to keep track of held cards in each suit
@@ -102,6 +119,7 @@ public class HandEvaluator {
         boolean[] clubs =  new boolean[14];
         boolean[] spades = new boolean[14];
 
+        // Add to the boolean arrays
         for (Card card : combinedHand) {
             int cardValue = CardRank.getValueFromRank(card.getRank());
 
@@ -121,6 +139,7 @@ public class HandEvaluator {
             }
         }
 
+        // Determine flushes in each suit
         HandEvaluationResult heartsHandEvaluation = hasFlush(hearts, CardSuit.HEART);
         HandEvaluationResult diamondsHandEvaluation = hasFlush(diamonds, CardSuit.DIAMOND);
         HandEvaluationResult clubsHandEvaluation = hasFlush(clubs, CardSuit.CLUB);
@@ -173,11 +192,11 @@ public class HandEvaluator {
 
     /**
      * Checks if there are <i>likeCardsToCheck</i> like cards in the provided combinedHand.
-     * <br>
      * For example, <i>checkLikeCards(hand, 3)</i> will check if there are 3 of a kind in the hand, similarly
-     * @param combinedHand
-     * @param likeCardsToCheck
-     * @return
+     *
+     * @param combinedHand Player's hand plus Table's hand
+     * @param likeCardsToCheck how many like cards to check for
+     * @return HandEvaluationResult the result of whether any like cards were found
      */
     private static HandEvaluationResult checkLikeCards(ArrayList<Card> combinedHand, int likeCardsToCheck) throws IllegalArgumentException {
         // Check parameters
@@ -223,9 +242,9 @@ public class HandEvaluator {
 
     /**
      * Check for a full house (3 of a kind with a pair)
-     * <br>
      * This can just call <i>checkLikeCards(combinedHand, 3)</i> then, after removing excess cards, <i>checkLikeCards(combinedHand, 2)</i>
-     * @param combinedHand
+     *
+     * @param combinedHand Player's hand plus Table's hand
      */
     private static HandEvaluationResult checkFullHouse(ArrayList<Card> combinedHand) {
         ArrayList<Card> combinedHandCopy = new ArrayList<>(combinedHand); // Copy combinedHand to avoid inadvertently modifying it
@@ -254,13 +273,21 @@ public class HandEvaluator {
         return new HandEvaluationResult();
     }
 
+    /**
+     * Checks for a STRAIGHT
+     *
+     * @param combinedHand Player's hand plus Table's hand
+     */
     private static HandEvaluationResult checkStraight(ArrayList<Card> combinedHand) {
+        // Initialize empty boolean array tracking each Card's presence in the hand
         boolean[] cardPresence = new boolean[14];
 
+        // Add cards presence to the array if found
         for (Card card : combinedHand) {
             cardPresence[CardRank.getValueFromRank(card.getRank())] = true;
         }
 
+        // Loop through the presence array up to index 10, because chunking and looking forward occurs inside the loop, such to avoid ArrayIndexOutOfBoundException
         for (int idx = 1; idx < 10; idx++) {
             if (cardPresence[idx]) { // If a true is found, check the succeeding 4 values to see if they are true too
                 ArrayList<Card> cardsToReturn = new ArrayList<>();
@@ -282,6 +309,11 @@ public class HandEvaluator {
         return new HandEvaluationResult();
     }
 
+    /**
+     * Checks for a ONE_PAIR or TWO_PAIR
+     *
+     * @param combinedHand Player's hand plus Table's hand
+     */
     private static HandEvaluationResult checkTwoPair(ArrayList<Card> combinedHand) {
         ArrayList<Card> combinedHandCopy = new ArrayList<>(combinedHand); // Copy combinedHand to avoid inadvertently modifying it
         HandEvaluationResult onePairResult = checkLikeCards(combinedHandCopy, 2);
@@ -312,6 +344,11 @@ public class HandEvaluator {
     // HELPERS
     /**
      * Will check for royal flush, straight flush, or a regular flush
+     *
+     * @param cards boolean array of card presence
+     * @param suit the CardSuit to check the flush for
+     *
+     * @return HandEvaluationResult the result of any found flushes
      */
     private static HandEvaluationResult hasFlush(
             boolean[] cards,
@@ -363,6 +400,16 @@ public class HandEvaluator {
         return new HandEvaluationResult(); // Default if no flush
     }
 
+    /**
+     * Determines the highest flush for each suit
+     *
+     * @param heartsHandEvaluation hand of all hearts
+     * @param diamondsHandEvaluation  hand of all diamonds
+     * @param clubsHandEvaluation  hand of all clubs
+     * @param spadesHandEvaluation  hand of all spades
+     * @param highestSuit the suit with the highest determined flush
+     * @return HandEvaluationResult the result of the final determined flush
+     */
     private static HandEvaluationResult determineFinalFlushEvaluationResult(HandEvaluationResult heartsHandEvaluation, HandEvaluationResult diamondsHandEvaluation, HandEvaluationResult clubsHandEvaluation, HandEvaluationResult spadesHandEvaluation, CardSuit highestSuit) {
         switch (highestSuit) {
             case HEART:
@@ -378,6 +425,10 @@ public class HandEvaluator {
         }
     }
 
+    /**
+     * Creates an empty frequency table of Cards (an EnumMap with each CardRank and an Integer to keep track of how many CardRanks there are)
+     * @return EnumMap map of CardRanks and Integers as a frequency
+     */
     private static EnumMap<CardRank, Integer> createEmptyRankFrequencyTable() {
         EnumMap<CardRank, Integer> frequencyTable = new EnumMap<>(CardRank.class);
 

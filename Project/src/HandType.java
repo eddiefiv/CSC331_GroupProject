@@ -1,3 +1,9 @@
+/**
+ * Enum to represent each possible hand a Player can have
+ *
+ * @author Eddie Falco
+ */
+
 public enum HandType {
     DEFAULT(0),
     HIGH_CARD(1),
@@ -11,8 +17,19 @@ public enum HandType {
     STRAIGHT_FLUSH(9),
     ROYAL_FLUSH(10);
 
+    /**
+     * Base constructor for syntactical reasons, does not implement anything
+     *
+     * @param strength strength
+     */
     HandType(int strength) {}
 
+    /**
+     * Gets a corresponding strength value from a HandType
+     *
+     * @param hand the HandType
+     * @return the corresponding strength value
+     */
     public static int getStrengthValueFromHandType(HandType hand) {
         return switch (hand) {
             case DEFAULT -> 0;
@@ -30,6 +47,12 @@ public enum HandType {
         };
     }
 
+    /**
+     * Gets a corresponding HandType from a strength value
+     *
+     * @param strength the strength value
+     * @return the corresponding HandType
+     */
     public static HandType getHandTypeFromStrengthValue(int strength) {
         return switch (strength) {
             case 0 -> DEFAULT;
