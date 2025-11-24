@@ -1,6 +1,7 @@
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 
@@ -61,4 +62,33 @@ public class PokerController {
     private Label npc2Pot;
     @FXML
     private Label npc3Pot;
+
+
+    private String rankToString(CardRank rank) {
+        return switch (rank) {
+            case ACE -> "A";
+            case TWO -> "2";
+            case THREE -> "3";
+            case FOUR -> "4";
+            case FIVE -> "5";
+            case SIX -> "6";
+            case SEVEN -> "7";
+            case EIGHT -> "8";
+            case NINE -> "9";
+            case TEN -> "10";
+            case JACK -> "J";
+            case QUEEN -> "Q";
+            case KING -> "K";
+        };
+    }
+
+    // loads cards for game
+    private Image loadCard(String cardName) {
+        String path = "/cards/" + cardName + ".png";
+        return new Image(getClass().getResourceAsStream(path));
+    }
+    // displays initial cards
+    public void displayInitialCards() {
+
+    }
 }

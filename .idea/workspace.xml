@@ -4,11 +4,74 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8922103b-6fd4-4b90-9f38-6545b025bfe7" name="Changes" comment="." />
+    <list default="true" id="8922103b-6fd4-4b90-9f38-6545b025bfe7" name="Changes" comment=".">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project/src/Card.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/PokerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project/src/PokerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cards/10_of_clubs.png" beforeDir="false" afterPath="$PROJECT_DIR$/cards/10C.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cards/10_of_diamonds.png" beforeDir="false" afterPath="$PROJECT_DIR$/cards/10D.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cards/10_of_hearts.png" beforeDir="false" afterPath="$PROJECT_DIR$/cards/10H.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cards/10_of_spades.png" beforeDir="false" afterPath="$PROJECT_DIR$/cards/10S.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cards/2_of_clubs.png" beforeDir="false" afterPath="$PROJECT_DIR$/cards/2C.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cards/2_of_diamonds.png" beforeDir="false" afterPath="$PROJECT_DIR$/cards/2D.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cards/2_of_hearts.png" beforeDir="false" afterPath="$PROJECT_DIR$/cards/2H.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cards/2_of_spades.png" beforeDir="false" afterPath="$PROJECT_DIR$/cards/2S.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cards/3_of_clubs.png" beforeDir="false" afterPath="$PROJECT_DIR$/cards/3C.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cards/3_of_diamonds.png" beforeDir="false" afterPath="$PROJECT_DIR$/cards/3D.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cards/3_of_hearts.png" beforeDir="false" afterPath="$PROJECT_DIR$/cards/3H.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cards/3_of_spades.png" beforeDir="false" afterPath="$PROJECT_DIR$/cards/3S.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cards/4_of_clubs.png" beforeDir="false" afterPath="$PROJECT_DIR$/cards/4C.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cards/4_of_diamonds.png" beforeDir="false" afterPath="$PROJECT_DIR$/cards/4D.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cards/4_of_hearts.png" beforeDir="false" afterPath="$PROJECT_DIR$/cards/4H.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cards/4_of_spades.png" beforeDir="false" afterPath="$PROJECT_DIR$/cards/4S.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cards/5_of_clubs.png" beforeDir="false" afterPath="$PROJECT_DIR$/cards/5C.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cards/5_of_diamonds.png" beforeDir="false" afterPath="$PROJECT_DIR$/cards/5D.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cards/5_of_hearts.png" beforeDir="false" afterPath="$PROJECT_DIR$/cards/5H.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cards/5_of_spades.png" beforeDir="false" afterPath="$PROJECT_DIR$/cards/5S.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cards/6_of_clubs.png" beforeDir="false" afterPath="$PROJECT_DIR$/cards/6C.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cards/6_of_diamonds.png" beforeDir="false" afterPath="$PROJECT_DIR$/cards/6D.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cards/6_of_hearts.png" beforeDir="false" afterPath="$PROJECT_DIR$/cards/6H.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cards/6_of_spades.png" beforeDir="false" afterPath="$PROJECT_DIR$/cards/6S.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cards/7_of_clubs.png" beforeDir="false" afterPath="$PROJECT_DIR$/cards/7C.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cards/7_of_diamonds.png" beforeDir="false" afterPath="$PROJECT_DIR$/cards/7D.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cards/7_of_hearts.png" beforeDir="false" afterPath="$PROJECT_DIR$/cards/7H.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cards/7_of_spades.png" beforeDir="false" afterPath="$PROJECT_DIR$/cards/7S.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cards/8_of_clubs.png" beforeDir="false" afterPath="$PROJECT_DIR$/cards/8C.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cards/8_of_diamonds.png" beforeDir="false" afterPath="$PROJECT_DIR$/cards/8D.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cards/8_of_hearts.png" beforeDir="false" afterPath="$PROJECT_DIR$/cards/8H.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cards/8_of_spades.png" beforeDir="false" afterPath="$PROJECT_DIR$/cards/8S.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cards/9_of_clubs.png" beforeDir="false" afterPath="$PROJECT_DIR$/cards/9C.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cards/9_of_diamonds.png" beforeDir="false" afterPath="$PROJECT_DIR$/cards/9D.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cards/9_of_hearts.png" beforeDir="false" afterPath="$PROJECT_DIR$/cards/9H.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cards/9_of_spades.png" beforeDir="false" afterPath="$PROJECT_DIR$/cards/9S.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cards/ace_of_clubs.png" beforeDir="false" afterPath="$PROJECT_DIR$/cards/AC.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cards/ace_of_diamonds.png" beforeDir="false" afterPath="$PROJECT_DIR$/cards/AD.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cards/ace_of_hearts.png" beforeDir="false" afterPath="$PROJECT_DIR$/cards/AH.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cards/ace_of_spades.png" beforeDir="false" afterPath="$PROJECT_DIR$/cards/AS.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cards/jack_of_clubs.png" beforeDir="false" afterPath="$PROJECT_DIR$/cards/JC.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cards/jack_of_diamonds.png" beforeDir="false" afterPath="$PROJECT_DIR$/cards/JD.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cards/jack_of_hearts.png" beforeDir="false" afterPath="$PROJECT_DIR$/cards/JH.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cards/jack_of_spades.png" beforeDir="false" afterPath="$PROJECT_DIR$/cards/JS.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cards/king_of_clubs.png" beforeDir="false" afterPath="$PROJECT_DIR$/cards/KC.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cards/king_of_diamonds.png" beforeDir="false" afterPath="$PROJECT_DIR$/cards/KD.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cards/king_of_hearts.png" beforeDir="false" afterPath="$PROJECT_DIR$/cards/KH.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cards/king_of_spades.png" beforeDir="false" afterPath="$PROJECT_DIR$/cards/KS.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cards/queen_of_clubs.png" beforeDir="false" afterPath="$PROJECT_DIR$/cards/QC.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cards/queen_of_diamonds.png" beforeDir="false" afterPath="$PROJECT_DIR$/cards/QD.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cards/queen_of_hearts.png" beforeDir="false" afterPath="$PROJECT_DIR$/cards/QH.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cards/queen_of_spades.png" beforeDir="false" afterPath="$PROJECT_DIR$/cards/QS.png" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
