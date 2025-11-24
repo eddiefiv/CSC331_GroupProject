@@ -8,6 +8,7 @@ import javafx.scene.image.ImageView;
 public class PokerController {
 
     //Community Cards
+    @FXML
     private ImageView comCard1;
     @FXML private ImageView comCard2;
     @FXML private ImageView comCard3;
