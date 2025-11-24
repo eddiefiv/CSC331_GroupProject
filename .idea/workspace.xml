@@ -4,41 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8922103b-6fd4-4b90-9f38-6545b025bfe7" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/lib.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project/Project.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Project/Project.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project/src/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project/src/Card.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project/src/Driver.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project/src/Driver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project/src/NPCState.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project/src/NPCState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project/src/NormalNPCStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project/src/NormalNPCStrategy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project/src/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project/src/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project/src/PokerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project/src/PokerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project/src/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project/src/Table.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project/Card.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project/CardRank.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project/CardSuit.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project/ChipValue.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project/ControllablePlayer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project/Driver.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project/FXMLDriver.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project/HandEvaluationResult.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project/HandEvaluator$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project/HandEvaluator.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project/HandType.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project/NPC.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project/NPCState.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project/NPCStrategy.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project/NormalNPCStrategy.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project/Player.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project/PlayerAction.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project/PokerController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project/PokerTable.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project/Table.class" beforeDir="false" />
-    </list>
+    <list default="true" id="8922103b-6fd4-4b90-9f38-6545b025bfe7" name="Changes" comment="." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -46,6 +12,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
@@ -62,7 +31,8 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "Merging dev",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "dev",
     "kotlin-language-version-configured": "true",
     "onboarding.tips.debug.path": "C:/Users/brayd/IdeaProjects/Group_Project_331/src/Main.java",
     "project.structure.last.edited": "Libraries",
@@ -97,7 +67,20 @@
       <option name="presentableId" value="Default" />
       <updated>1763927327992</updated>
     </task>
+    <task id="LOCAL-00001" summary=".">
+      <option name="closed" value="true" />
+      <created>1763953120544</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1763953120544</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="." />
+    <option name="LAST_COMMIT_MESSAGE" value="." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
