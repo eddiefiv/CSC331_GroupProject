@@ -51,6 +51,7 @@ public class Table {
     public static void gameplayLoop() {
         // Infinite loop of hands
         while (true) {
+            System.out.println("=== NEW GAME STARTING ===");
             resetHandState();
 
             // Build & shuffle deck
@@ -111,13 +112,6 @@ public class Table {
     }
 
     private static void bettingRound(int startingIndex) {
-        // Reset per-round bets
-        for (Player p : players) {
-            p.setBet(0);
-        }
-
-        currentBet = 0;
-
         // Build set of active players who still need to act
         Set<Player> playersToAct = new LinkedHashSet<>();
         for (Player p : players) {
@@ -164,11 +158,6 @@ public class Table {
             }
 
             idx = (idx + 1) % players.size();
-        }
-
-        // Reset individual bets for next round (bets already in pot)
-        for (Player p : players) {
-            p.setBet(0);
         }
     }
 
@@ -403,7 +392,7 @@ public class Table {
 
         // Post blinds via Player.raise (which updates Table.pot and player.bet)
         small.raise(SMALL_BLIND_AMOUNT);
-        // remove posted blind from their balance immediately
+        // Remove posted blind from their balance immediately
         small.setBalance(small.getBalance() - SMALL_BLIND_AMOUNT);
 
         big.raise(BIG_BLIND_AMOUNT);
@@ -514,9 +503,7 @@ public class Table {
         pot = 0;
     }
 
-    // -----------------------
     // Helper: reset state between hands
-    // -----------------------
     private static void resetHandState() {
         board.clear();
         deck.clear();
@@ -532,7 +519,6 @@ public class Table {
             p.setIsBigBlind(false);
             p.setHandEvaluation(null);
             p.setActiveTurn(false);
-            // We cannot set isActivelyPlaying (no public setter), so ensure Table's foldedPlayers controls play
         }
     }
 
