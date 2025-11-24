@@ -12,7 +12,7 @@ public class Table {
     private static final int SMALL_BLIND_AMOUNT = 5;
 
     // Initialize player ArrayList
-    private static ArrayList<Player> players = new ArrayList<Player>();
+    public static ArrayList<Player> players = new ArrayList<Player>();
 
     // Initialize betting attributes
     private static int pot = 0;

@@ -19,7 +19,7 @@ public class FXMLDriver extends Application {
     @Override
     public void start(Stage stage) throws Exception{
         FXMLLoader loader = new FXMLLoader(
-                getClass().getResource("PokerTable.fxml")
+                getClass().getResource("PokerStartScreen.fxml")
         );
 
         Scene scene = new Scene(loader.load());
