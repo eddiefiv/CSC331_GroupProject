@@ -1,3 +1,8 @@
+/**
+ * Enum to represent each rank (2-Ace) of a card
+ *
+ * @author Eddie Falco
+ */
 public enum CardRank {
     ACE(1),
     TWO(2),
@@ -13,8 +18,20 @@ public enum CardRank {
     QUEEN(12),
     KING(13);
 
+    /**
+     * Base constructor for syntactical reasons, does not implement anything
+     *
+     * @param value numerical value of the card
+     */
     private CardRank(int value) {}
 
+
+    /**
+     * Takes a number and derives a CardRank from it
+     *
+     * @param value the number to derive a CardRank from
+     * @return CardRank the rank corresponding with the number value
+     */
     public static CardRank getRankFromValue(int value) {
         return switch (value) {
             case 1 -> ACE;
@@ -34,6 +51,12 @@ public enum CardRank {
         };
     }
 
+    /**
+     * Takes a CardRank and derives a number value from it
+     *
+     * @param rank the CardRank to derive a number value from
+     * @return int the number value corresponding with the CardRank
+     */
     public static int getValueFromRank(CardRank rank) {
         return switch (rank) {
             case ACE -> 1;

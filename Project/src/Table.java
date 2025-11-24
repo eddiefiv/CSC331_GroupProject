@@ -7,17 +7,22 @@
 import java.util.*;
 
 public class Table {
+    // Initialize blinds
     private static final int BIG_BLIND_AMOUNT = 10;
     private static final int SMALL_BLIND_AMOUNT = 5;
 
+    // Initialize player ArrayList
     private static ArrayList<Player> players = new ArrayList<Player>();
 
+    // Initialize betting attributes
     private static int pot = 0;
     private static int currentBet = 0;
 
+    // Initialize Card related atrtibutes
     private static ArrayList<Card> deck = new ArrayList<Card>(52);
     public static ArrayList<Card> board = new ArrayList<Card>(5);
 
+    // Initialize the index position for the dealer
     private static int dealerPosition = 0;
 
     // Track players who have folded in current hand
@@ -25,29 +30,50 @@ public class Table {
 
     private static final Scanner scanner = new Scanner(System.in);
 
+    /**
+     * Initialize the Table and its values
+     *
+     * @param numNPCs how many NPCs to add
+     * @throws IllegalArgumentException thrown if too few NPCs
+     */
     public static void tableInit(int numNPCs) throws IllegalArgumentException {
+        // Check to make sure there are enough NPCs added
         if (numNPCs < 2) {
             throw new IllegalArgumentException("Cannot have less than 2 NPCs");
         }
+
+        // Add all NPCs to the Table
         for (int i = 0; i < numNPCs; i++) {
             players.add(new NPC("NPC" + i, new NormalNPCStrategy())); // Add NPCs to the list of Players
         }
     }
 
     // GETTERS AND SETTERS
-    public static ArrayList<Card> getDeck() {
-        return deck;
-    }
 
+    /**
+     * Gets the Table's pot
+     *
+     * @return int the pot
+     */
     public static int getPot() {
         return pot;
     }
 
+    /**
+     * Sets the Table's pot
+     *
+     * @param pot the pot to set
+     */
     public static void setPot(int pot) {
         Table.pot = pot;
     }
 
     // GAMEPLAY
+
+    /**
+     * The main gameplay loop
+     * All code that handles the gameplay actions live here, or are invoked from here
+     */
     public static void gameplayLoop() {
         // Infinite loop of hands
         while (true) {
@@ -111,6 +137,10 @@ public class Table {
         }
     }
 
+    /**
+     * Handles the betting flow each round
+     * @param startingIndex which player to start from
+     */
     private static void bettingRound(int startingIndex) {
         // Build set of active players who still need to act
         Set<Player> playersToAct = new LinkedHashSet<>();
@@ -122,9 +152,11 @@ public class Table {
 
         int idx = startingIndex;
 
+        // While there are Players to play still
         while (!playersToAct.isEmpty()) {
             Player p = players.get(idx);
 
+            // If the player is not folded and is able to act
             if (!foldedPlayers.contains(p) && playersToAct.contains(p)) {
                 int prevBet = p.getBet();
 
@@ -161,6 +193,11 @@ public class Table {
         }
     }
 
+    /**
+     * Handles a Player's turn, and determines whether to invoke a ControllablePlayer prompt or inference an NPC action
+     *
+     * @param player the Player to check
+     */
     private static void handlePlayerTurn(Player player) {
         if (foldedPlayers.contains(player)) return;
 
@@ -177,7 +214,13 @@ public class Table {
         }
     }
 
+    /**
+     * Prompts the ControllablePlayer (user) for what action they want to take
+     *
+     * @param player the ControllablePlayer to prompt for
+     */
     private static void promptPlayerForTurn(Player player) {
+        // Print out all information
         System.out.println("\n=== " + player.getPlayerName() + "'s Turn ===");
         System.out.println("Your cards: " + player.getHand());
         System.out.println("Current best hand: " + player.getHandEvaluation().getHandType() + ", Cards: " + player.getHandEvaluation().getCards());
@@ -199,6 +242,7 @@ public class Table {
 
             String move = scanner.nextLine().trim().toLowerCase();
 
+            // Follow what action the Player has decided
             switch (move) {
                 case "check":
                     if (!canCheck) {
@@ -260,6 +304,11 @@ public class Table {
         }
     }
 
+    /**
+     * Handle the NPCs inferencing
+     *
+     * @param npc the NPC to inference
+     */
     private static void handleNPCTurn(NPC npc) {
         // Build npcState (fields per your earlier snippet)
         NPCState npcState = new NPCState();
@@ -273,8 +322,10 @@ public class Table {
 
         System.out.println(npc.getPlayerName() + " thinking...");
 
+        // Inference the NPC
         PlayerAction action = npc.getStrategy().inference(npcState);
 
+        // Follow the action determined by the NPCStrategy
         switch (action) {
             case FOLD:
                 npc.fold();
@@ -335,6 +386,9 @@ public class Table {
         }
     }
 
+    /**
+     * Deal the cards to each Player
+     */
     public static void deal() {
         int numPlayers = players.size();
 
@@ -349,7 +403,9 @@ public class Table {
         }
     }
 
-
+    /**
+     * Deal the flop
+     */
     public static void dealFlop() {
         burnCard();
         board.add(deck.removeFirst());
@@ -359,6 +415,9 @@ public class Table {
         System.out.println("Flop: " + board);
     }
 
+    /**
+     * Deal the turn
+     */
     private static void dealTurnCard() {
         burnCard();
         board.add(deck.removeFirst());
@@ -366,6 +425,9 @@ public class Table {
         System.out.println("Turn: " + board.getLast());
     }
 
+    /**
+     * Deal the river
+     */
     private static void dealRiverCard() {
         burnCard();
         board.add(deck.removeFirst());
@@ -373,11 +435,18 @@ public class Table {
         System.out.println("River: " + board.getLast());
     }
 
+    /**
+     * Burn a card from the top of the deck
+     */
     private static void burnCard() {
         if (!deck.isEmpty()) deck.removeFirst();
     }
 
     // Blinds and rotation
+
+    /**
+     * Post the blinds and adjust the Table bets
+     */
     private static void postBlinds() {
         foldedPlayers.clear();
 
@@ -405,10 +474,18 @@ public class Table {
                 small.getPlayerName(), SMALL_BLIND_AMOUNT, big.getPlayerName(), BIG_BLIND_AMOUNT);
     }
 
+    /**
+     * Rotate the blinds to the preceding Players
+     */
     private static void rotateBlinds() {
         dealerPosition = (dealerPosition + 1) % players.size();
     }
 
+    /**
+     * Calculates how many active (non-folded) players there currently are
+     *
+     * @return int how many active (non-folded) players
+     */
     private static int countActivePlayers() {
         int count = 0;
         for (Player p : players) {
@@ -417,10 +494,18 @@ public class Table {
         return count;
     }
 
+    /**
+     * Is there one player remaining
+     *
+     * @return boolean true if there is one player remaining
+     */
     private static boolean onlyOnePlayerLeft() {
         return countActivePlayers() == 1;
     }
 
+    /**
+     * Handles an immediate win
+     */
     private static void handleImmediateWin() {
         for (Player p : players) {
             if (!foldedPlayers.contains(p)) {
@@ -433,7 +518,11 @@ public class Table {
         }
     }
 
-    // Determine winners: returns list of winners (split pot among them). Comparison is done by HandType only.
+    /**
+     * Determine winners: returns list of winners (split pot among them). Comparison is done by HandType only.
+     *
+     * @return List list of Players that won
+     */
     private static List<Player> determineWinners() {
         List<Player> contenders = new ArrayList<>();
         for (Player p : players) {
@@ -483,6 +572,11 @@ public class Table {
         return winners;
     }
 
+    /**
+     * Award the pot to a winner or winners
+     *
+     * @param winners the winners that won the round and whom to distribute the pot to
+     */
     private static void awardPot(List<Player> winners) {
         if (winners == null || winners.isEmpty()) {
             System.out.println("No winners found; clearing pot.");
@@ -531,6 +625,11 @@ public class Table {
         }
     }
 
+    /**
+     * Add a Player to the Table
+     *
+     * @param playerToJoin the Player to add
+     */
     public static void joinTable(Player playerToJoin) {
         players.add(playerToJoin);
     }

@@ -1,4 +1,16 @@
+/**
+ * Simple NPCStrategy that has a very baseline action derivation for an NPC each turn
+ *
+ * @author Eddie Falco
+ */
+
 public class NormalNPCStrategy implements NPCStrategy {
+    /**
+     * Inference a NPCs move given an NPCState holding the data needed for a decision to be made
+     *
+     * @param state the NPCState that will base the decision
+     * @return PlayerAction the action that will be exectued by the NPC
+     */
     @Override
     public PlayerAction inference(NPCState state) {
         // If npc can check and hand is weak, check
