@@ -1,7 +1,6 @@
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 
@@ -42,7 +41,5 @@ public class PokerController {
     @FXML private Label npc2Pot;
     @FXML private Label npc3Pot;
 
-    public void displayInitialCards(){
-
+    public void displayInitialCards() {
     }
-}
