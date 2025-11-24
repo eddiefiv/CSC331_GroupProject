@@ -71,7 +71,7 @@ public class PokerController {
     private void onDeal(){
 
         //Player cards
-        Table.startGame();
+        Table.gameplayLoop();
         playerCard1.setImage(new Image("/images/back.png"));
         playerCard2.setImage(new Image("/images/back.png"));
 

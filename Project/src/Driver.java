@@ -1,17 +1,19 @@
 public class Driver {
     public static void main(String[] args) {
-        ControllablePlayer p1 = new ControllablePlayer("Player 1", 750);
-        ControllablePlayer p2 = new ControllablePlayer("Player 2", 500);
 
-        Table.tableInit(5);
-        Table.joinTable(p1);
-        Table.joinTable(p2);
+        // Create a controllable player (you)
+        ControllablePlayer you = new ControllablePlayer("You");
 
-        System.out.println(p1.getHand());
+        // Join table
+        Table.joinTable(you);
 
+        // Add 3 NPCs
+        Table.tableInit(3);  // Adds NPC0, NPC1, NPC2
+
+        // Run 2 sample hands
+        System.out.println("=== Starting poker simulation ===");
         Table.gameplayLoop();
 
-        System.out.println(p1.getHand());
-        System.out.println(p2.getHand());
+        System.out.println("=== Simulation complete ===");
     }
 }
