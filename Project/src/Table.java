@@ -30,13 +30,17 @@ public class Table {
 
     private static final Scanner scanner = new Scanner(System.in);
 
+    // Reference to PokerController
+    private static PokerController pokerController;
+
     /**
      * Initialize the Table and its values
      *
      * @param numNPCs how many NPCs to add
+     * @param pokerController reference to FXML PokerController for interacting with the table UI
      * @throws IllegalArgumentException thrown if too few NPCs
      */
-    public static void tableInit(int numNPCs) throws IllegalArgumentException {
+    public static void tableInit(int numNPCs, PokerController pokerController) throws IllegalArgumentException {
         // Check to make sure there are enough NPCs added
         if (numNPCs < 2) {
             throw new IllegalArgumentException("Cannot have less than 2 NPCs");
@@ -46,6 +50,8 @@ public class Table {
         for (int i = 0; i < numNPCs; i++) {
             players.add(new NPC("NPC" + i, new NormalNPCStrategy())); // Add NPCs to the list of Players
         }
+
+        Table.pokerController = pokerController;
     }
 
     // GETTERS AND SETTERS
@@ -80,6 +86,9 @@ public class Table {
             System.out.println("=== NEW GAME STARTING ===");
             resetHandState();
 
+            // Update UI after reset
+            pokerController.updateLabelsUI();
+
             // Build & shuffle deck
             newDeck();
             shuffleDeck();
@@ -90,12 +99,15 @@ public class Table {
             // Deal two hole cards each (deal starting at small blind, which is dealer+1)
             deal();
 
+            // Update UI with new dealt cards
+            pokerController.updateLabelsUI();
+
             // Pre-flop betting: first to act is player after big blind
             int smallIdx = (dealerPosition + 1) % players.size();
             int bigIdx = (dealerPosition + 2) % players.size();
             int firstToActPreflop = (dealerPosition + 3) % players.size();
 
-            bettingRound(firstToActPreflop);
+            bettingRound(firstToActPreflop); // UI gets update in round
 
             if (onlyOnePlayerLeft()) {
                 handleImmediateWin();
@@ -126,6 +138,11 @@ public class Table {
 
             // River
             dealRiverCard(); // evaluate() called inside
+
+            // Update UI
+            pokerController.updateLabelsUI();
+
+            // Start round
             bettingRound(smallIdx);
 
             // Showdown
@@ -187,6 +204,8 @@ public class Table {
                 else {
                     playersToAct.remove(p);
                 }
+
+                pokerController.updateLabelsUI();
             }
 
             idx = (idx + 1) % players.size();
@@ -228,55 +247,32 @@ public class Table {
         System.out.println("Your bet: $" + player.getBet());
         System.out.println("Current bet to match: $" + currentBet);
 
-        boolean deciding = true;
 
-        while (deciding) {
-            // Can check only if player's bet matches currentBet
-            boolean canCheck = (player.getBet() == currentBet);
+        boolean canCheck = (player.getBet() == currentBet);
+        boolean canCall = currentBet > player.getBet();
 
-            // Show action prompt
-            System.out.print("Choose action (");
-            if (canCheck) System.out.print("check, ");
-            if (currentBet > player.getBet()) System.out.print("call, ");
-            System.out.print("raise, fold): ");
-
-            String move = scanner.nextLine().trim().toLowerCase();
-
+        // Update UI to allow action
+        pokerController.promptPlayerAction(canCheck, canCall).thenAccept(action -> {
             // Follow what action the Player has decided
-            switch (move) {
-                case "check":
-                    if (!canCheck) {
-                        System.out.println("You cannot check. You must call or fold.");
-                        break;
-                    }
-                    System.out.println(player.getPlayerName() + " checks.");
-                    deciding = false;
+            switch (action) {
+                case CHECK:
                     break;
-
-                case "call":
+                case CALL:
                     int toCall = currentBet - player.getBet();
-                    if (toCall <= 0) {
-                        System.out.println("Nothing to call; you can check instead.");
-                        break;
-                    }
                     player.call(toCall);
                     player.setBalance(player.getBalance() - toCall);
                     System.out.println(player.getPlayerName() + " calls $" + toCall);
-                    deciding = false;
                     break;
-
-                case "raise":
-                    System.out.print("Enter raise amount: ");
+                case RAISE:
                     int raiseAmount;
                     try {
-                        raiseAmount = Integer.parseInt(scanner.nextLine());
+                        raiseAmount = Integer.parseInt(pokerController.raiseAmountField.getText());
                     } catch (NumberFormatException e) {
-                        System.out.println("Invalid number.");
-                        break;
+                        raiseAmount = 0;
                     }
 
                     if (raiseAmount <= 0) {
-                        System.out.println("Raise must be positive.");
+                        player.call(0);
                         break;
                     }
 
@@ -288,20 +284,18 @@ public class Table {
                     player.setBalance(player.getBalance() - totalRaise);
 
                     System.out.println(player.getPlayerName() + " raises to $" + currentBet);
-                    deciding = false;
                     break;
-
-                case "fold":
+                case FOLD:
                     player.fold();
                     foldedPlayers.add(player);
                     System.out.println(player.getPlayerName() + " folds.");
-                    deciding = false;
                     break;
-
                 default:
                     System.out.println("Invalid action.");
             }
-        }
+        });
+
+        pokerController.disablePlayerActionButtons();
     }
 
     /**
@@ -511,6 +505,7 @@ public class Table {
             if (!foldedPlayers.contains(p)) {
                 // the remaining player already contributed to pot; simply award full pot
                 p.setBalance(p.getBalance() + pot);
+                //pokerController.showWinScreen(p.getPlayerName(), pot);
                 System.out.printf("%s wins the pot of $%d (everyone else folded).%n", p.getPlayerName(), pot);
                 pot = 0;
                 break;
