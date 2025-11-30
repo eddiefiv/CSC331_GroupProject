@@ -3,9 +3,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextInputControl;
 import javafx.stage.Stage;
 
 public class PokerStartScreenController {
+
+    // Inputs
+    @FXML
+    private TextInputControl playerNameInput;
 
     // Buttons
     @FXML
@@ -17,15 +22,19 @@ public class PokerStartScreenController {
     @FXML
     private Label nameInput;
 
-    // Actions
+    // Actions/Listeners
     @FXML
     private void startGame() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("PokerTable.fxml"));
             Scene nextScene = new Scene(loader.load());
 
-            // Get the current stage from ANY node in the scene:
-            Stage stage = (Stage) startBtn.getScene().getWindow();
+            // Get PokerController to be able to set playerName
+            PokerController pokerController = loader.getController();
+            pokerController.setPlayerName(playerNameInput.getText());
+
+            // Set and show the new stage and scene
+            Stage stage = new Stage();
             stage.setScene(nextScene);
             stage.show();
 
