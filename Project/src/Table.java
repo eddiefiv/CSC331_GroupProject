@@ -107,7 +107,7 @@ public class Table {
             int bigIdx = (dealerPosition + 2) % players.size();
             int firstToActPreflop = (dealerPosition + 3) % players.size();
 
-            bettingRound(firstToActPreflop);
+            bettingRound(firstToActPreflop); // UI gets update in round
 
             if (onlyOnePlayerLeft()) {
                 handleImmediateWin();
@@ -138,6 +138,11 @@ public class Table {
 
             // River
             dealRiverCard(); // evaluate() called inside
+
+            // Update UI
+            pokerController.updateLabelsUI();
+
+            // Start round
             bettingRound(smallIdx);
 
             // Showdown
@@ -244,7 +249,7 @@ public class Table {
 
 
         boolean canCheck = (player.getBet() == currentBet);
-        boolean canCall = currentBet > player.getBet()
+        boolean canCall = currentBet > player.getBet();
 
         // Update UI to allow action
         pokerController.promptPlayerAction(canCheck, canCall).thenAccept(action -> {
@@ -289,6 +294,8 @@ public class Table {
                     System.out.println("Invalid action.");
             }
         });
+
+        pokerController.disablePlayerActionButtons();
     }
 
     /**
@@ -498,6 +505,7 @@ public class Table {
             if (!foldedPlayers.contains(p)) {
                 // the remaining player already contributed to pot; simply award full pot
                 p.setBalance(p.getBalance() + pot);
+                //pokerController.showWinScreen(p.getPlayerName(), pot);
                 System.out.printf("%s wins the pot of $%d (everyone else folded).%n", p.getPlayerName(), pot);
                 pot = 0;
                 break;

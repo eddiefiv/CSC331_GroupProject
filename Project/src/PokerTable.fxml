@@ -180,16 +180,21 @@
                                     <Font size="14.0" />
                                  </font>
                               </Button>
-                              <HBox prefHeight="100.0" prefWidth="240.0" spacing="15.0">
-                                 <children>
-                                    <Button fx:id="raiseButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Raise">
+                               <HBox prefHeight="100.0" prefWidth="240.0" spacing="15.0">
+                                   <Button fx:id="raiseButton" maxHeight="-Infinity" maxWidth="-Infinity"
+                                           minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
+                                           prefHeight="25.0" prefWidth="100.0" text="Raise">
+                                      <font>
+                                          <Font size="14.0"/>
+                                      </font>
+                                   </Button>
+                                   <TextField fx:id="raiseAmountField" prefWidth="84.0" promptText="Raise Amount"
+                                              text="0">
                                        <font>
-                                          <Font size="14.0" />
+                                           <Font size="22.0"/>
                                        </font>
-                                    </Button>
-                                    <TextField fx:id="raiseAmountField" "84.0" promptText="Raise Amount" text="0" />
-                                 </children>
-                              </HBox>
+                                   </TextField>
+                               </HBox>
                               <Button fx:id="foldButton" ellipsisString="" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Fold" textOverrun="CLIP">
                                  <font>
                                     <Font size="14.0" />

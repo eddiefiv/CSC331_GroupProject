@@ -165,6 +165,7 @@ public class PokerController {
         // Enable buttons
         foldButton.setDisable(false);
         raiseButton.setDisable(false);
+        raiseAmountField.setDisable(false);
 
         // Set future
         callButton.setOnAction(event -> {
@@ -178,6 +179,14 @@ public class PokerController {
         });
 
         return futureAction;
+    }
+
+    public void disablePlayerActionButtons() {
+        callButton.setDisable(true);
+        checkButton.setDisable(true);
+        foldButton.setDisable(true);
+        raiseButton.setDisable(true);
+        raiseAmountField.setDisable(true);
     }
 
     public void setPlayerName(String playerName) {
