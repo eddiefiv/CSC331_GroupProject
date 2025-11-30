@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="701.0" prefWidth="687.0" style="-fx-background-color: #000;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:controller="PokerController" prefHeight="701.0" prefWidth="687.0" style="-fx-background-color: #000;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #8B501F; -fx-border-width: 15; -fx-border-radius: 850; -fx-background-radius: 850; -fx-max-height: 600; -fx-max-width: 600; -fx-background-color: #35654d;" BorderPane.alignment="CENTER">
          <top>
