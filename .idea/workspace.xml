@@ -4,7 +4,72 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8922103b-6fd4-4b90-9f38-6545b025bfe7" name="Changes" comment="." />
+    <list default="true" id="8922103b-6fd4-4b90-9f38-6545b025bfe7" name="Changes" comment=".">
+      <change afterPath="$PROJECT_DIR$/.idea/CSC331_GroupProject.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Group_Project_331.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Group_Project_331.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/NPCState.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project/src/NPCState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/PokerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project/src/PokerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/PokerStartScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Project/resources/PokerStartScreen.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/PokerStartScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project/src/PokerStartScreenController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/PokerTable.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Project/resources/PokerTable.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project/src/Table.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/cards/10C.png" beforeDir="false" afterPath="$PROJECT_DIR$/Project/resources/cards/10C.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/cards/10D.png" beforeDir="false" afterPath="$PROJECT_DIR$/Project/resources/cards/10D.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/cards/10H.png" beforeDir="false" afterPath="$PROJECT_DIR$/Project/resources/cards/10H.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/cards/10S.png" beforeDir="false" afterPath="$PROJECT_DIR$/Project/resources/cards/10S.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/cards/2C.png" beforeDir="false" afterPath="$PROJECT_DIR$/Project/resources/cards/2C.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/cards/2D.png" beforeDir="false" afterPath="$PROJECT_DIR$/Project/resources/cards/2D.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/cards/2H.png" beforeDir="false" afterPath="$PROJECT_DIR$/Project/resources/cards/2H.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/cards/2S.png" beforeDir="false" afterPath="$PROJECT_DIR$/Project/resources/cards/2S.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/cards/3C.png" beforeDir="false" afterPath="$PROJECT_DIR$/Project/resources/cards/3C.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/cards/3D.png" beforeDir="false" afterPath="$PROJECT_DIR$/Project/resources/cards/3D.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/cards/3H.png" beforeDir="false" afterPath="$PROJECT_DIR$/Project/resources/cards/3H.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/cards/3S.png" beforeDir="false" afterPath="$PROJECT_DIR$/Project/resources/cards/3S.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/cards/4C.png" beforeDir="false" afterPath="$PROJECT_DIR$/Project/resources/cards/4C.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/cards/4D.png" beforeDir="false" afterPath="$PROJECT_DIR$/Project/resources/cards/4D.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/cards/4H.png" beforeDir="false" afterPath="$PROJECT_DIR$/Project/resources/cards/4H.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/cards/4S.png" beforeDir="false" afterPath="$PROJECT_DIR$/Project/resources/cards/4S.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/cards/5C.png" beforeDir="false" afterPath="$PROJECT_DIR$/Project/resources/cards/5C.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/cards/5D.png" beforeDir="false" afterPath="$PROJECT_DIR$/Project/resources/cards/5D.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/cards/5H.png" beforeDir="false" afterPath="$PROJECT_DIR$/Project/resources/cards/5H.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/cards/5S.png" beforeDir="false" afterPath="$PROJECT_DIR$/Project/resources/cards/5S.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/cards/6C.png" beforeDir="false" afterPath="$PROJECT_DIR$/Project/resources/cards/6C.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/cards/6D.png" beforeDir="false" afterPath="$PROJECT_DIR$/Project/resources/cards/6D.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/cards/6H.png" beforeDir="false" afterPath="$PROJECT_DIR$/Project/resources/cards/6H.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/cards/6S.png" beforeDir="false" afterPath="$PROJECT_DIR$/Project/resources/cards/6S.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/cards/7C.png" beforeDir="false" afterPath="$PROJECT_DIR$/Project/resources/cards/7C.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/cards/7D.png" beforeDir="false" afterPath="$PROJECT_DIR$/Project/resources/cards/7D.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/cards/7H.png" beforeDir="false" afterPath="$PROJECT_DIR$/Project/resources/cards/7H.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/cards/7S.png" beforeDir="false" afterPath="$PROJECT_DIR$/Project/resources/cards/7S.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/cards/8C.png" beforeDir="false" afterPath="$PROJECT_DIR$/Project/resources/cards/8C.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/cards/8D.png" beforeDir="false" afterPath="$PROJECT_DIR$/Project/resources/cards/8D.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/cards/8H.png" beforeDir="false" afterPath="$PROJECT_DIR$/Project/resources/cards/8H.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/cards/8S.png" beforeDir="false" afterPath="$PROJECT_DIR$/Project/resources/cards/8S.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/cards/9C.png" beforeDir="false" afterPath="$PROJECT_DIR$/Project/resources/cards/9C.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/cards/9D.png" beforeDir="false" afterPath="$PROJECT_DIR$/Project/resources/cards/9D.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/cards/9H.png" beforeDir="false" afterPath="$PROJECT_DIR$/Project/resources/cards/9H.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/cards/9S.png" beforeDir="false" afterPath="$PROJECT_DIR$/Project/resources/cards/9S.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/cards/AC.png" beforeDir="false" afterPath="$PROJECT_DIR$/Project/resources/cards/AC.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/cards/AD.png" beforeDir="false" afterPath="$PROJECT_DIR$/Project/resources/cards/AD.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/cards/AH.png" beforeDir="false" afterPath="$PROJECT_DIR$/Project/resources/cards/AH.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/cards/AS.png" beforeDir="false" afterPath="$PROJECT_DIR$/Project/resources/cards/AS.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/cards/JC.png" beforeDir="false" afterPath="$PROJECT_DIR$/Project/resources/cards/JC.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/cards/JD.png" beforeDir="false" afterPath="$PROJECT_DIR$/Project/resources/cards/JD.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/cards/JH.png" beforeDir="false" afterPath="$PROJECT_DIR$/Project/resources/cards/JH.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/cards/JS.png" beforeDir="false" afterPath="$PROJECT_DIR$/Project/resources/cards/JS.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/cards/KC.png" beforeDir="false" afterPath="$PROJECT_DIR$/Project/resources/cards/KC.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/cards/KD.png" beforeDir="false" afterPath="$PROJECT_DIR$/Project/resources/cards/KD.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/cards/KH.png" beforeDir="false" afterPath="$PROJECT_DIR$/Project/resources/cards/KH.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/cards/KS.png" beforeDir="false" afterPath="$PROJECT_DIR$/Project/resources/cards/KS.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/cards/QC.png" beforeDir="false" afterPath="$PROJECT_DIR$/Project/resources/cards/QC.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/cards/QD.png" beforeDir="false" afterPath="$PROJECT_DIR$/Project/resources/cards/QD.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/cards/QH.png" beforeDir="false" afterPath="$PROJECT_DIR$/Project/resources/cards/QH.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/cards/QS.png" beforeDir="false" afterPath="$PROJECT_DIR$/Project/resources/cards/QS.png" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,6 +85,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "Brayden-Christiana"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/eddiefiv/CSC331_GroupProject",
+    "accountId": "f29287bb-833e-467a-b50f-7ffc29b475fb"
+  }
+}]]></component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -34,14 +111,17 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.FXMLDriver.executor": "Run",
+    "Application.Main.executor": "Run",
+    "Application.PokerGame.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "dev",
     "kotlin-language-version-configured": "true",
     "onboarding.tips.debug.path": "C:/Users/brayd/IdeaProjects/Group_Project_331/src/Main.java",
-    "project.structure.last.edited": "Libraries",
+    "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.18275861",
     "settings.editor.selected.configurable": "preferences.JavaFX"
@@ -49,10 +129,23 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\brayd\IdeaProjects\Group_Project_331\Project\resources\" />
+      <recent name="C:\Users\brayd\IdeaProjects\Group_Project_331\Project\resources" />
       <recent name="C:\Users\brayd\IdeaProjects\Group_Project_331\Project\src" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
     </key>
   </component>
   <component name="RunManager">
+    <configuration name="PokerGame" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="Group_Project_331" />
+      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Users\brayd\Downloads\openjfx-21.0.9_windows-x64_bin-sdk\javafx-sdk-21.0.9\lib&quot; --add-modules javafx.controls,javafx.fxml,javafx.graphics --enable-native-access=javafx.graphics " />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="JetRunConfigurationType">
       <module name="Project" />
       <method v="2">

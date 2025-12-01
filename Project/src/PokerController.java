@@ -1,198 +1,165 @@
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import java.util.ArrayList;
 
 import java.util.concurrent.CompletableFuture;
 
-
 public class PokerController {
 
-    // Private attributes
     private String playerName;
+    private boolean showHands = false;
+
+    public void setShowHands(boolean show) {
+        this.showHands = show;
+    }
 
     // Inputs
-    @FXML
-    public TextField raiseAmountField;
+    @FXML public TextField raiseAmountField;
 
     // Community Cards
-    @FXML
-    private ImageView houseCard1;
-    @FXML
-    private ImageView houseCard2;
-    @FXML
-    private ImageView houseCard3;
-    @FXML
-    private ImageView houseCard4;
-    @FXML
-    private ImageView houseCard5;
+    @FXML private ImageView houseCard1, houseCard2, houseCard3, houseCard4, houseCard5;
 
     // Player Cards
-    @FXML
-    private ImageView playerCard1;
-    @FXML
-    private ImageView playerCard2;
+    @FXML private ImageView playerCard1, playerCard2;
 
-    // NPC 1 Cards
-    @FXML
-    private ImageView npcCard1;
-    @FXML
-    private ImageView npcCard2;
-
-    // NPC 2 Cards
-    @FXML
-    private ImageView npc2Card1;
-    @FXML
-    private ImageView npc2Card2;
-
-    // NPC 3 Cards
-    @FXML
-    private ImageView npc3Card1;
-    @FXML
-    private ImageView npc3Card2;
+    // NPC Cards
+    @FXML private ImageView npc1Card1, npc1Card2, npc2Card1, npc2Card2, npc3Card1, npc3Card2;
 
     // Buttons
-    @FXML
-    private Button callButton;
-    @FXML
-    private Button checkButton;
-    @FXML
-    private Button foldButton;
-    @FXML
-    private Button raiseButton;
+    @FXML private Button callButton, checkButton, foldButton, raiseButton;
 
     // Labels
-    @FXML
-    private Label potLabel;
-    @FXML
-    private Label playerPot;
-    @FXML
-    private Label npc1Pot;
-    @FXML
-    private Label npc2Pot;
-    @FXML
-    private Label npc3Pot;
+    @FXML private Label potLabel, playerPot, npcPot1, npcPot2, npcPot3;
 
-    // Actions
     @FXML
     public void initialize() {
         System.out.println("PokerController initialized!");
 
-        // Create a new Player
-        ControllablePlayer player = new ControllablePlayer(playerName, 750);
+        // Create controllable player with initial balance
+        ControllablePlayer player = new ControllablePlayer(playerName);
 
-        // Create a new table with 4 players (1 human + 3 NPCs)
-        Table.tableInit(3, this);
-        Table.joinTable(player);
+        Table.tableInit(3, this); // initialize table with 3 NPCs
+        Table.joinTable(player);  // join controllable player
 
-        // Start gameplay loop
-        Table.gameplayLoop();
+        // Start the game loop in background thread
+        new Thread(Table::gameplayLoop).start();
     }
 
+    // Update all UI labels and card images
     public void updateLabelsUI() {
-        // DISCLAIMER ---- THIS CODE IS VERY UNCLEAN AND NOT NEAT,
-        // IT WAS IN A RUSH TO GET STUFF WORKING SINCE GROUP MEMBERS (not Brayden and Eddie) DON'T HELP :(
+        Platform.runLater(() -> {
+            // Player cards — always visible
+            if (!Table.players.getLast().getHand().isEmpty()) {
+                setCardImage(playerCard1, Table.players.getLast().getHand().get(0));
+                setCardImage(playerCard2, Table.players.getLast().getHand().get(1));
+            } else {
+                setCardImage(playerCard1, null);
+                setCardImage(playerCard2, null);
+            }
 
-        // Update ControllablePlayer UI
-        if (!Table.players.getLast().getHand().isEmpty()) { // Get ControllablePlayer, only update if Player has a hand
-            playerCard1.setImage(new Image(cardToFileName(Table.players.getLast().getHand().getFirst())));
-            playerCard2.setImage(new Image(cardToFileName(Table.players.getLast().getHand().getLast())));
-        } else { // If Player has no hand, remove card images if any
-            playerCard1.setImage(null);
-            playerCard2.setImage(null);
-        }
+            // NPCs — only visible if showHands == true
+            updateNPCCards(npc1Card1, npc1Card2, 0);
+            updateNPCCards(npc2Card1, npc2Card2, 1);
+            updateNPCCards(npc3Card1, npc3Card2, 2);
 
-        // Update NPCs UI
-        // NPC 1
-        if (!Table.players.getFirst().getHand().isEmpty()) {
-            npcCard1.setImage(new Image(cardToFileName(Table.players.getFirst().getHand().getFirst())));
-            npcCard2.setImage(new Image(cardToFileName(Table.players.getFirst().getHand().getLast())));
-        }
-        // NPC 2
-        if (!Table.players.get(1).getHand().isEmpty()) {
-            npc2Card1.setImage(new Image(cardToFileName(Table.players.get(1).getHand().getFirst())));
-            npc2Card2.setImage(new Image(cardToFileName(Table.players.get(1).getHand().getLast())));
-        }
-        // NPC 3
-        if (!Table.players.get(2).getHand().isEmpty()) {
-            npc3Card1.setImage(new Image(cardToFileName(Table.players.get(2).getHand().getFirst())));
-            npc3Card2.setImage(new Image(cardToFileName(Table.players.get(2).getHand().getLast())));
-        }
-
-        // Update Player balances and Table pot UI
-        potLabel.setText("" + Table.getPot());
-        playerPot.setText("" + Table.players.getLast().getBalance());
-        npc1Pot.setText("" + Table.players.getFirst().getBalance());
-        npc2Pot.setText("" + Table.players.get(1).getBalance());
-        npc3Pot.setText("" + Table.players.get(2).getBalance());
-
-        // Community cards if any are available
-        if (!Table.board.isEmpty()) {
-            for (int i = 0; i < Table.board.size(); i++) {
-                Image img = new Image(cardToFileName(Table.board.get(i)));
-                switch (i) {
-                    case 0 -> houseCard1.setImage(img);
-                    case 1 -> houseCard2.setImage(img);
-                    case 2 -> houseCard3.setImage(img);
-                    case 3 -> houseCard4.setImage(img);
-                    case 4 -> houseCard5.setImage(img);
+            // Community cards — clear empty slots
+            ImageView[] houseCards = {houseCard1, houseCard2, houseCard3, houseCard4, houseCard5};
+            for (int i = 0; i < houseCards.length; i++) {
+                if (i < Table.board.size()) {
+                    setCardImage(houseCards[i], Table.board.get(i));
+                } else {
+                    setCardImage(houseCards[i], null);
                 }
             }
+
+            // Update balances and pot
+            potLabel.setText("" + Table.getPot());
+            playerPot.setText("" + Table.players.getLast().getBalance());
+            npcPot1.setText("" + Table.players.getFirst().getBalance());
+            npcPot2.setText("" + Table.players.get(1).getBalance());
+            npcPot3.setText("" + Table.players.get(2).getBalance());
+        });
+    }
+
+    /**
+     * Helper method to show or hide NPC hands
+     */
+    private void updateNPCCards(ImageView card1, ImageView card2, int playerIndex) {
+        if (showHands) {
+            ArrayList<Card> hand = Table.players.get(playerIndex).getHand();
+            if (!hand.isEmpty()) {
+                setCardImage(card1, hand.get(0));
+                setCardImage(card2, hand.get(1));
+            } else {
+                setCardImage(card1, null);
+                setCardImage(card2, null);
+            }
+        } else {
+            // hide NPC cards
+            setCardImage(card1, null);
+            setCardImage(card2, null);
         }
     }
 
+    /**
+     * Asks player for action
+     */
     public CompletableFuture<PlayerAction> promptPlayerAction(boolean isCheckAllowed, boolean isCallAllowed) {
         CompletableFuture<PlayerAction> futureAction = new CompletableFuture<>();
 
-        // If check is allowed
-        if (isCheckAllowed) {
-            checkButton.setDisable(false);
-            checkButton.setOnAction(event -> {
-                futureAction.complete(PlayerAction.CHECK);
-            });
-        }
+        Platform.runLater(() -> {
+            checkButton.setDisable(!isCheckAllowed);
+            callButton.setDisable(!isCallAllowed);
+            foldButton.setDisable(false);
+            raiseButton.setDisable(false);
+            raiseAmountField.setDisable(false);
 
-        // If call is allowed
-        if (isCallAllowed) {
-            callButton.setDisable(false);
-            callButton.setOnAction(event -> {
-                futureAction.complete(PlayerAction.CALL);
-            });
-        }
-
-        // Enable buttons
-        foldButton.setDisable(false);
-        raiseButton.setDisable(false);
-        raiseAmountField.setDisable(false);
-
-        // Set future
-        callButton.setOnAction(event -> {
-            futureAction.complete(PlayerAction.CALL);
-        });
-        foldButton.setOnAction(event -> {
-            futureAction.complete(PlayerAction.FOLD);
-        });
-        raiseButton.setOnAction(event -> {
-            futureAction.complete(PlayerAction.RAISE);
+            checkButton.setOnAction(event -> futureAction.complete(PlayerAction.CHECK));
+            callButton.setOnAction(event -> futureAction.complete(PlayerAction.CALL));
+            foldButton.setOnAction(event -> futureAction.complete(PlayerAction.FOLD));
+            raiseButton.setOnAction(event -> futureAction.complete(PlayerAction.RAISE));
         });
 
         return futureAction;
     }
 
+    /**
+     * Method for disabling player actions when not their turn
+     */
     public void disablePlayerActionButtons() {
-        callButton.setDisable(true);
-        checkButton.setDisable(true);
-        foldButton.setDisable(true);
-        raiseButton.setDisable(true);
-        raiseAmountField.setDisable(true);
+        Platform.runLater(() -> {
+            checkButton.setDisable(true);
+            callButton.setDisable(true);
+            foldButton.setDisable(true);
+            raiseButton.setDisable(true);
+            raiseAmountField.setDisable(true);
+        });
     }
 
+    /**
+     * Method that sets player name, scrapped option from start screen to select a name, this was made as a placeholder but ended up sticking around
+     */
     public void setPlayerName(String playerName) {
         this.playerName = playerName;
     }
 
+    /**
+     * Helper to set the image of the card
+     */
+    private void setCardImage(ImageView view, Card card) {
+        if (view == null) return;
+        if (card == null) view.setImage(null);
+        else view.setImage(new Image(getClass().getResourceAsStream(cardToFileName(card))));
+    }
+
+    /**
+     * Coverts cards to file name for display
+     */
     private String cardToFileName(Card card) {
         String rank = switch (card.getRank()) {
             case ACE -> "A";
@@ -208,6 +175,7 @@ public class PokerController {
             case JACK -> "J";
             case QUEEN -> "Q";
             case KING -> "K";
+            default -> throw new IllegalArgumentException("Unknown rank: " + card.getRank());
         };
 
         String suit = switch (card.getSuit()) {
@@ -215,9 +183,10 @@ public class PokerController {
             case DIAMOND -> "D";
             case CLUB -> "C";
             case SPADE -> "S";
-            case DEFAULT -> null;
+            default -> throw new IllegalArgumentException("Unknown suit: " + card.getSuit());
         };
 
-        return String.format("../../cards/%s%s", rank, suit);
+        return "/cards/" + rank + suit + ".png";
     }
+
 }

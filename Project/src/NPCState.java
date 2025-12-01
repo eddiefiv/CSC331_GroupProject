@@ -9,7 +9,7 @@ public class NPCState {
     public int currentBet; // NPCs current bet
     public int callAmount; // Amount the NPC would need to call during turn
     public int potSize; // Size of the pot
-    public EnumMap<ChipValue, Integer> chips; // NPCs chips (not used)
     public int playersRemaining; // Active (un-folded) players left in the game
     public boolean canCheck; // Can the NPC check
+    public int chips; // chips used for balance
 }
